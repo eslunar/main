@@ -7,7 +7,7 @@ A **Tiny** and **Powerful** JavaScript framework for building **AMAZING** web ap
 const butt=new Element("<button>Press me!</button>")
 butt.on("click",()=>alert("HELLO MOM!"))
 
-app.add(butt)
+app.body.add(butt)
 ```
 
 ---
