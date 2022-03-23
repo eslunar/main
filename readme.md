@@ -1,6 +1,6 @@
 PlayScript
 ---
-A **Tiny** and **Powerful** JavaScript framework for building **AMAZING** web apps, fast!
+A **Tiny** and **Powerful** JavaScript framework for building **AMAZING** multi-threaded web apps, fast!
 
 ###### Demo hello world
 ```javascript
