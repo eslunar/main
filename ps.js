@@ -43,7 +43,7 @@ body{
 
 
 /*libraries*/
-let l_engines=["/engine/dixie.js","/engine/txml.js","/engine/require.js","/engine/interface.js"]
+let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js"]
 let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
 let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js"]

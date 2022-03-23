@@ -12,5 +12,11 @@ css.selector("body",{
     opacity:1
   }
 })
+
+.query("print",{
+  body:{
+    padding:8
+  }
+})
 app.body.html("hello!")
 console.log(css.raw)

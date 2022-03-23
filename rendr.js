@@ -1,3 +1,1 @@
-app.listen(post=>{
-  if(post.from=="main")app.post(app.body.clone())
-})
+console.log("hi from the render thread!")

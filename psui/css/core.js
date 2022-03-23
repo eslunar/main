@@ -29,7 +29,11 @@ const css ={
     let k=""
     /*parse keyframes*/
     Object.keys(this.keyframes).filter(e=>e).map(e=>k+=`@keyframes ${e}{${Object.keys(this.keyframes[e]).map(n=>`${n}{${this.convert(this.keyframes[e][n])}}`).join("")}}`)
-    this.raw=s+k
+    
+    let m=""
+    /*parse keyframes*/
+    Object.keys(this.queries).filter(e=>e).map(e=>m+=`@media ${e}{${Object.keys(this.queries[e]).map(n=>`${n}{${this.convert(this.queries[e][n])}}`).join("")}}`)
+    this.raw=s+k+m
     return this
   },
   convert(obj={}){
