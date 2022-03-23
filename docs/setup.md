@@ -31,7 +31,7 @@ And thats about it, run via localhost in your browser and see results.
 - description - sets the web manifest description.
 - icon - sets the favicon and web manifest icon.
 - main - path to the entry javascript file.
-- debug - boolean enable debugging and console.
+- flags - string of app flags [explained in detail here](./flags.md)
 - worker - sets the path to the service worker.
 
 ---

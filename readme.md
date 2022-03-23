@@ -16,7 +16,7 @@ app.add(butt)
 - commonJS like module import exports
 - Synchronous data fetching
 - Multi threaded
-- xml and html parsing
+- Quick xml and html parsing
 - ⚡ fast DOM manipulation
 - Most advanced DOM Query system
 - API packed!
@@ -29,7 +29,7 @@ and so much more under `30kb` all in your browser, no compilations steps, no shi
 ### Under the hood.
 **PS** runs your javascript code in a dedicated `main` worker and relays information to the `ui` thread, overall increasing web perfomance and response time.
 
-It also provides the **require** function to import scripts and the **module** object to export code, encouraging modular programming and ultimately making it compatible with plainJS libraries on npm.
+It also provides the **require** function to import scripts and the **module** object to export code, encouraging modular programming and ultimately making it compatible with commonJS libraries on npm.
 
 Being multi threaded also gives **ps** an advantage boost, giving applications the ability to divide the workload into seperate threads that can cross-communicate via a simple **post** and **listen** API.
 
@@ -57,6 +57,6 @@ So I figured why don't the client do some work too, share the work and keep serv
 
 With PlayScript you can make web scraping apps, search engines, clones, anything your heart desires... and still host it all for free on Github or Vercel!
 
-Ever since nodeJS, no one seems to care about front-end JS anymore, but years have past, hardware became cheaper and more powerful device are online visiting your site, **lets take advantage!**
+Ever since NodeJS, no one seems to care about front-end JS anymore, but years have past, hardware became cheaper and more powerful device are online visiting your site, **lets take advantage!**
 
 happy coding!
