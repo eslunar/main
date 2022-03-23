@@ -1,62 +1,53 @@
-/*setup basics*/
-const app={
- 
+/*set aliases to engines*/const app={
+  html:txml,
+  db:name=>new Dexie(name),
+  
+  /*ui thread communication*/
+  send:(type="default",data="")=>self.postMessage([type,data]),
+  
+  /*inter thread communication*/
+  post:(data="",thread="main")=>app.send("message",{from:app.manifest.id,to:thread,data:data}),
+  listeners:[],
+  listen:res=>app.listeners.push(res),
+  
+  /*utilities*/
+  uuid:UtilUUID,repeat:UtilRepeat,print:UtilPrint,
+  
+  /*data registers*/
+  moduleCache:{},
+  interfaces:{},
+  anchors:[],
+  events:{},
+  
 }
-let require;
-const __scope__={root:"/",current:"/"}
-/*caching required modules, uses stale data to save bandwidth and speedup response time, request fresh data by setting stale=false in options*/const __cache__={}
-const manifest={}
-const global=self
+
 
 
 
 self.onmessage=e=>{
-  const data=e.data
+  let ev=e.data[0]
+  let data=e.data[1]
   
-  if(data[0]=="post"){
-    app.listeners.filter(e=>e.id==data[1].from).forEach(e=>e.func(data[1]))
+  if(ev=="setup"){
+    app.manifest=data
+    let require=requireFactory(data.origin)
+    /*bind body to ui thread*/app.body=new Element("<body></body>")
+    app.send("bind-body",[app.manifest.id,app.body.attr("_")])
+    require(data.main||"/index.js",{async:true})
   }
   
-  if(data[0]=="events"){
-    if(app.events[data[1].id])if(app.events[data[1].id][data[1].type]){
-      var cv=app.events[data[1].id][data[1].type]
-      cv.registrar.lastActiveEvent=cv.exec
-      cv.registrar.lastActiveEvent()
-    }
+  if(ev=="message")app.listeners.forEach(e=>e(data))
+  
+  if(ev=="interface")app.interfaces[data.id]=data.data
+  
+  if(ev=="body-ready");
+  
+  if(ev=="event")if(app.events[data.id])if(app.events[data.id][data.type]){
+    let ref = app.events[data.id][data.type]
+    let ce = new Element(ref.ref)
+    
+    ce.lastEvent=ref.exec
+    ce.lastEvent()
   }
-  
-  
-  /*on app start*/if(data[0]=="setup"){
-    /*get the root location of the playscript library, to support local development*/app.lib=data[1].root;
-    /**/Object.assign(manifest,data[1].manifest)
-    
-    /*CORE IMPORTS*/
-    /*utilities*/self.importScripts(app.lib+"/util/all.js")
-    /*require factory for imports*/self.importScripts(app.lib+"/require.js")
-    require=requireFactory("/")
-    /*polyfill for console events*/self.importScripts(app.lib+"/misc/console.js")
-    
-    /*VDOM Parser*/importScripts(app.lib+"/engines/xml.js")
-    
-    
-    if(data[1].type=="main"){
-    /*only load virtual DOM manipulative functions on the main thread, sub thread access may cause conflicts*/
-    /*VDOM core*/self.importScripts(app.lib+"/psui/element/core.js")
-    /*VDOM query*/self.importScripts(app.lib+"/psui/query/core.js")
-    /*Reflected body*/self.importScripts(app.lib+"/psui/body.js")
-    /*Selector function*/self.importScripts(app.lib+"/psui/selector/core.js")
-    
-    self.importScripts(app.lib+"/threads/manager.js")
-    
-    } else {
-      /*edit manifest to match sub thread info*/manifest.main=data[1].thread.path
-    }
-    self.importScripts(app.lib+"/threads/comms.js")
-    /*launch entry module*/require(manifest.main||"/index.js",{
-      async:true
-    })
-  }
-  
-  
-  
 }
+

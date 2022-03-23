@@ -40,7 +40,7 @@ const __query__ = function(children,query){
     return false
   })
   
-  /*get all ascending parents of an element*/if(query.parents)kids=kids.filter(e=>{
+  /*get all ascending parents of an element*/if(query.ancestor)kids=kids.filter(e=>{
     let prnt=[]
     let fndr=function(e){
       if(e.parent){
@@ -48,7 +48,7 @@ const __query__ = function(children,query){
         fndr(e.parent)
       } }
       fndr(e)
-      if(__query__(prnt,query.parents).length)return true
+      if(__query__(prnt,query.ancestor).length)return true
     return false
   })
   
@@ -70,14 +70,17 @@ const __query__ = function(children,query){
     return false
   })
   
-  /*get all descending children*/if(query.children)kids=kids.filter(e=>{
-    if(__query__(new Element(e).nodes(),query.children).length)return true
+  /*get all descending children*/if(query.descendant)kids=kids.filter(e=>{
+    if(__query__(new Element(e).nodes(),query.descendant).length)return true
     return false
   })
   
   /**/
   
   if(query.text)kids=kids.filter(e=>test(new Element(e).text(),query.text))
+  
+  if(query.html)kids=kids.filter(e=>test(new Element(e).html(),query.html))
+  
   kids=kids.map(e=>new Element(e))
   return kids
 }

@@ -1,4 +1,4 @@
-module.exports=function NodeText(...args){
+Element.prototype.text=function NodeText(...args){
   if(args.length){
     this.raw.children=args.map(e=>String(e).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"))
   } else {

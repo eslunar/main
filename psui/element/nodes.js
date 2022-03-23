@@ -1,4 +1,4 @@
-module.exports=function NodeList(text){
+Element.prototype.nodes=function NodeList(text){
   let kids=[]
   let rec=function(parent){
     parent.children.forEach(e=>{

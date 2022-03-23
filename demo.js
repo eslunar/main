@@ -1,13 +1,16 @@
-bod=new Element(`<bod>
-<p class="bold para maki">hi</p>
-<div id="x">hello<s><span style="color:blue"> joe</span></s></div>
-<p id="x" class="hi bae">howya</p>
-</bod>`)
-app.add(bod)
+css.selector("body",{
+  padding:0,
+  marginLeft:"80px",
+  animation:"fade-in"
+})
 
-bod.add(new Element("<button onclick='pop'> press me </button>"))
-
-
-vibe=new Selector({tag:"button"})
-//vibe.css("background","pink")
-
+.keyframe("fade-in",{
+  from:{
+    opacity:0
+  },
+  to:{
+    opacity:1
+  }
+})
+app.body.html("hello!")
+console.log(css.raw)

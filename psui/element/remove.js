@@ -1,4 +1,4 @@
-module.exports=function Remove(...args){
+Element.prototype.remove=function Remove(...args){
   if(args.length==0){
     if(this.raw.parent)this.raw.parent.children.splice(this.raw.parent.children.indexOf(this.raw),1)
   } else {
