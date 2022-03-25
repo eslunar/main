@@ -30,10 +30,12 @@ self.onmessage=e=>{
   
   if(ev=="setup"){
     app.manifest=data
+    app.manifest.async==undefined?app.manifest.async=true:""
+    app.moduleCache=app.manifest.moduleCache
     let require=requireFactory(data.origin)
     /*bind body to ui thread*/app.body=new Element("<body></body>")
     app.send("bind-body",[app.manifest.id,app.body.attr("_")])
-    require(data.main||"/index.js",{async:true})
+    require(data.main||"/index.js",app.manifest)
   }
   
   if(ev=="message")app.listeners.forEach(e=>e(data))

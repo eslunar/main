@@ -11,6 +11,10 @@ manifest.origin=location.href
 /*localStorage support*/let store;try{localStorage.test="true?";store=localStorage}catch(e){store={}}
 /*current version*/const version=0.1
 /*active event listeners*/var eventPool=[]
+/*delete expired modules*/const modules = JSON.parse(store.modules||"{}")
+manifest.moduleCache={}
+Object.keys(modules).filter(e=>e).forEach(e=>modules[e].expires<Date.now()?delete modules[e]:manifest.moduleCache[e]=modules[e].data)
+store.modules=JSON.stringify(modules)
 
 
 /*app loading screen*/document.body=document.body||document.createElement("body")
@@ -99,6 +103,10 @@ function start(){
             /*create a new one*/eventPool.push({id:data.id,type:data.type});
             /*activate it*/(document.querySelector(`[_=${data.id}]`)||{})[data.type]=eventHandler(data.id,data.type)
             
+          }
+          /*cache modules*/if(ev=="module-cache"){
+            modules[data.path]={expires:data.expires,data:data.data}
+            store.modules=JSON.stringify(modules)
           }
         
       

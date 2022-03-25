@@ -59,4 +59,11 @@ const d3=require("d3")
 ```
 
 ---
+### Module Caching
+By default, a module's cache lifespan is one day, you can multiply it by passing a multiplication to the `expire` key in require options object
+```javascript
+require("//...",{expire: 30})//deletes module from cache after 30 days
+require("//...",{expire: 0.5})//deletes module from cache after 12 hours
+require("//...",{expire: 0})//deletes module from cache on session end
+```
 **[continue to threads](./thread.js)**

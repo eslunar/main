@@ -1,1 +1,1 @@
-console.log("hi from the render thread!")
+alert("hi from the render thread!")

@@ -19,6 +19,7 @@ app.body.add(butt)
 - Quick xml and html parsing
 - ⚡ fast DOM manipulation
 - Most advanced DOM Query system
+- Awesome module caching for offline support
 - API packed!
 
 

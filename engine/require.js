@@ -5,6 +5,7 @@ const requireFactory=function(scope){
   scope=scope.split("/");scope.pop();scope.push("");scope=new URL(scope.join("/"),app.manifest.origin)
   return function(path,opt={}){
     path=String(path)
+    
     /*auto append .js to file*/if(path.startsWith("/")||path.startsWith("."))if(!path.split("/").pop().includes("."))path+=".js";
     
     /*Manage current path*/
@@ -16,6 +17,7 @@ const requireFactory=function(scope){
     
     
     if(app.moduleCache[path]){
+      alert("stale")
       request={
         responseText:app.moduleCache[path],
         responseURL:path,
@@ -26,7 +28,8 @@ const requireFactory=function(scope){
     request.open('GET',path, false);
     request.send(null)}
     
-    /*add request to cache*/app.moduleCache[path]=request.responseText;
+    /*add request to cache*/app.moduleCache[path]=request.responseText
+    /*add request to store*/app.send("module-cache",{path:path,data:request.responseText,expires:Date.now()+(86400000*(typeof opt.expires=="number"?opt.expires:1))})
     
     /*support redirects changing the scope of the script*/path=request.responseURL
     
