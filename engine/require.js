@@ -15,31 +15,21 @@ const requireFactory=function(scope){
     
     console.debug("require "+path)
     
+    /*request asset from server, caching is left to service worker*/
+    let request=new XMLHttpRequest()
+      request.open('GET',path, false);
+      request.send(null)
     
-    if(app.moduleCache[path]){
-      alert("stale")
-      request={
-        responseText:app.moduleCache[path],
-        responseURL:path,
-        status:200
-      }
-    } else {
-    request=new XMLHttpRequest()
-    request.open('GET',path, false);
-    request.send(null)}
-    
-    /*add request to cache*/app.moduleCache[path]=request.responseText
-    /*add request to store*/app.send("module-cache",{path:path,data:request.responseText,expires:Date.now()+(86400000*(typeof opt.expires=="number"?opt.expires:1))})
     
     /*support redirects changing the scope of the script*/path=request.responseURL
     
-    if (request.status==200){
+    if (request.status>=200&&request.status<=299){
     if(opt.async)return new Function(`return async function(){try{let module={};let require=requireFactory("${path}");${request.responseText};return module.exports||{}}catch(e){console.log("%cModule Error - ","color:red;font-weight:600",\`\${e.name}: \${e.message}\nin file ${path}\`);self.close()}}`)(/*double exec due to child func*/)(...(opt.args||opt.arguments||[]));
     else return new Function(`try{let module={};let require=requireFactory("${path}");${request.responseText};return module.exports||{}}catch(e){console.log("%cModule Error - ","color:red;font-weight:600",\`\${e.name}: \${e.message}\nin file ${path}\`);self.close()}`)(...(opt.args||opt.arguments||[]))
     
     }
     
-else console.log("%cNetwork Error - ","color:red;font-weight:600",`Cannot require module ${path}`)
+else console.log("%cError Fetching - ","color:red;font-weight:600",`Cannot require module ${path}. Exited with status ${request.status}`)
 
   }
 }

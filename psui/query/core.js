@@ -15,6 +15,8 @@ const __query__ = function(children,query){
   
   /*id attribute*/if(query.id)kids=kids.filter(e=>test(e.attributes.id,query.id))
   
+  /*stamp attribute*/if(query.stamp)kids=kids.filter(e=>test(e.attributes._,query.stamp))
+  
   /*tag name*/if(query.tag)kids=kids.filter(e=>test(e.tagName,query.tag))
   
   /*class values*/if(query.class)kids=kids.filter(e=>test(e.attributes.class,query.class))

@@ -1,0 +1,9 @@
+h1 - im a header.
+
+im a paragraph (img src=/img.png - icon) (i - playscript)
+
+code - function(){
++ var i = 4
++ return i
++ }
+

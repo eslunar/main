@@ -53,21 +53,11 @@ In your app's manifest, add `modules` key that accepts an object, here you can a
   }
 }
 ```
-##### aquire the module in other scripts:
+##### require the module in other script:
 ```javascript
 const d3=require("d3")
 ```
 
 ---
-### Module Caching
-By default, a module's cache lifespan is one day, you can multiply it by passing a number to the `expire` key in require options object
-```javascript
-require("//...",{expire: 30})//deletes module from cache after 30 days
-require("//...",{expire: 0.5})//deletes module from cache after 12 hours
-require("//...",{expire: 0})//deletes module from cache on session end
-```
 
-Although a module is served from stale data for an amount of time, it still updates its cache on every successful network request, this is called a cache strategy, to implement your own strategy, you can pass [one of these](./cache-strategies.md) strategies to a `cache` option on your require function.
-
----
-**[continue to threads](./thread.js)**
+**[continue to threads](./threads.md)**

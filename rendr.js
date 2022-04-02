@@ -1,1 +1,1 @@
-alert("hi from the render thread!")
+alert("hi rende")

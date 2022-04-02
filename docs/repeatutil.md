@@ -10,3 +10,4 @@ app.repeat(function(index,lastReturn),repeatCount)
 ```javascript
 app.repeat(amount=>app.print(`logged ${amount+1} time(s)`),10)
 ```
+Used internally.

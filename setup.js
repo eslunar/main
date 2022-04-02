@@ -14,7 +14,6 @@
   uuid:UtilUUID,repeat:UtilRepeat,print:UtilPrint,
   
   /*data registers*/
-  moduleCache:{},
   interfaces:{},
   anchors:[],
   events:{},
@@ -44,12 +43,10 @@ self.onmessage=e=>{
   
   if(ev=="body-ready");
   
-  if(ev=="event")if(app.events[data.id])if(app.events[data.id][data.type]){
-    let ref = app.events[data.id][data.type]
-    let ce = new Element(ref.ref)
-    
-    ce.lastEvent=ref.exec
-    ce.lastEvent()
+  if(ev=="event")if(app.body.query({stamp:data.id})){
+    let ref = app.body.query({stamp:data.id})
+    ref.lastEvent=ref.raw.events[data.type]
+    ref.lastEvent()
   }
 }
 

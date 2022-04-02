@@ -34,6 +34,7 @@ const css ={
     /*parse keyframes*/
     Object.keys(this.queries).filter(e=>e).map(e=>m+=`@media ${e}{${Object.keys(this.queries[e]).map(n=>`${n}{${this.convert(this.queries[e][n])}}`).join("")}}`)
     this.raw=s+k+m
+    app.send("global-css",this.raw)
     return this
   },
   convert(obj={}){

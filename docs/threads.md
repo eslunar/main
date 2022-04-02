@@ -11,7 +11,7 @@ edit your `manifest`:
  }
 }
 ```
-###### edit your `index.js`:
+###### create your `index.js`:
 ```javascript
 app.post("hows playscript?","my-thread")
 ```

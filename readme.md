@@ -61,6 +61,6 @@ With PlayScript you can make web scraping apps, search engines, clones, anything
 
 Ever since NodeJS, no one seems to care about front-end JS anymore, but years have past, hardware became cheaper and more powerful device are online visiting your site, **lets take advantage!**
 
-**Sidenote** playscript was built with es2017 which includes async / await and such, and I don't plan to go lower any time soon, majority of the internet userbase has access to modern browsers, so adding support to older browsers just seem counter productive and adds to the framework's size (which obviously means a slower response time).
+**Sidenote** playscript was built with es2017 in mind, which includes async / await and such, and I don't plan to go lower any time soon, majority of the internet userbase has access to modern browsers, so adding support to older browsers just seem counter productive and adds to the framework's size (which obviously means a slower response time).
 
 happy coding!

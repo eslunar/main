@@ -13,16 +13,16 @@ Element.prototype.refresh=function RefreshNodes(type){
     
     
     /*EVENT MANAGER*/
-    /*create event instance*/app.events[id]=app.events[id]||{}
-        /*parse events*/Object.keys(e.attributes).filter(e=>e.startsWith("on")).forEach(x=>{
+    /*create event instance/app.events[id]=app.events[id]||{}
+        /*parse events/Object.keys(e.attributes).filter(e=>e.startsWith("on")).forEach(x=>{
       
-      /*Save events with registrars*/app.events[id][x]={
+      /*Save events with registrars/app.events[id][x]={
         exec:typeof e.attributes[x]=="string"?new Function(`return ${String(e.attributes[x]).includes("(")?e.attributes[x]:e.attributes[x]+"()"}`):e.attribtutes[x],
         ref:e
       }
       delete e.attributes[x]
-      /*register event on ui thread*/self.postMessage(["event",{from:app.manifest.id,id:e.attributes._,type:x}])
-    })
+      /*register event on ui thread/self.postMessage(["event",{from:app.manifest.id,id:e.attributes._,type:x}])
+    })*/
     
     /*bind to anchors*/
     

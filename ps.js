@@ -11,10 +11,6 @@ manifest.origin=location.href
 /*localStorage support*/let store;try{localStorage.test="true?";store=localStorage}catch(e){store={}}
 /*current version*/const version=0.1
 /*active event listeners*/var eventPool=[]
-/*delete expired modules*/const modules = JSON.parse(store.modules||"{}")
-manifest.moduleCache={}
-Object.keys(modules).filter(e=>e).forEach(e=>modules[e].expires<Date.now()?delete modules[e]:manifest.moduleCache[e]=modules[e].data)
-store.modules=JSON.stringify(modules)
 
 
 /*app loading screen*/document.body=document.body||document.createElement("body")
@@ -50,9 +46,9 @@ body{
 let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js"]
 let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
-let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js"]
+let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js"]
 
-/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js"].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
+/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",/*css styles*/"/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js"].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
    store.script=e.join("\n")
    store.version=version
    start()
@@ -101,18 +97,50 @@ function start(){
           /*register events*/if(ev=="event")if(data.from=="main"){
             /*delete old registrars*/eventPool=eventPool.filter(e=>e.id!=data.id&&e.type!=data.type)
             /*create a new one*/eventPool.push({id:data.id,type:data.type});
-            /*activate it*/(document.querySelector(`[_=${data.id}]`)||{})[data.type]=eventHandler(data.id,data.type)
+            /*activate it*/(document.querySelector(`[_=${data.id}]`)||{})[data.type]=eventHandler(data.id,data.type)}
             
-          }
-          /*cache modules*/if(ev=="module-cache"){
-            modules[data.path]={expires:data.expires,data:data.data}
-            store.modules=JSON.stringify(modules)
-          }
-        
-      
+            /*set global css*/if(ev=="global-css"){
+              if(document.querySelector("style[global]"))document.querySelector("style[global]").innerHTML=data
+              else {
+                let css=document.createElement("style")
+                css.innerHTML=data
+                css.setAttribute("global",true)
+                document.head.appendChild(css)
+              }
+            }
+              
+            
+            
+          
     }
-    worker.onerror=(e)=>{console.log("%cEngine Error","color:red;font-weight:600","\n"+e.message+"\nat line:"+e.lineno+" charno:"+e.colno+"\nps.beta.js v"+version);worker.terminate()}
+    worker.onerror=(e)=>{console.log("%cEngine Error","color:red;font-weight:600","\n"+e.message+"\nps.beta.js v"+version);worker.terminate()}
     return {[e]:worker}
   }))
   
 }
+
+window.addEventListener('load', (event) => {
+  /*register dynamic web manifest and service worker*/let mn=document.createElement("link")
+  mn.rel="manifest"
+  mn.href="data:application/manifest+json,"+encodeURIComponent(JSON.stringify({
+    name:manifest.name||"Playscript App",
+    short_name:manifest.name||"PlayScript App",
+    start_url:manifest.entry||"/",
+    display:"standalone",
+    description:manifest.desc||"Some random PlayScript Application",
+    background_color:"fcfcfc",
+    icons:[
+      {
+        src:manifest.icon||"/favicon.ico",
+        sizes:"192x192",
+        type:"image/png"
+      },
+      {
+        src:manifest.icon||"/favicon.ico",
+        sizes:"512x512",
+        type:"image/png"
+      }
+      ]
+  }))
+  document.head.appendChild(mn)
+});
