@@ -125,22 +125,29 @@ window.addEventListener('load', (event) => {
   mn.href="data:application/manifest+json,"+encodeURIComponent(JSON.stringify({
     name:manifest.name||"Playscript App",
     short_name:manifest.name||"PlayScript App",
-    start_url:manifest.entry||"/",
+    start_url:manifest.entry||location.origin,
     display:"standalone",
     description:manifest.desc||"Some random PlayScript Application",
-    background_color:"fcfcfc",
+    background_color:"#fcfcfc",
+    theme_color:manifest.hue||"#e91e63",
     icons:[
       {
-        src:manifest.icon||"/favicon.ico",
+        src:manifest.icon||location.origin+"/favicon.ico",
         sizes:"192x192",
         type:"image/png"
       },
       {
-        src:manifest.icon||"/favicon.ico",
+        src:manifest.icon||location.origin+"/favicon.ico",
         sizes:"512x512",
         type:"image/png"
       }
       ]
   }))
   document.head.appendChild(mn)
+  
+  let tt=document.createElement("title")
+  tt.innerText=manifest.name||"PlayScript App"
+  document.head.appendChild(tt)
+  
+  if("serviceWorker" in navigator)navigator.serviceWorker.register(manifest.worker||"/sw.js")
 });
