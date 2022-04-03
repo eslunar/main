@@ -1,6 +1,6 @@
 /*set aliases to engines*/const app={
   html:txml,
-  db:name=>new Dexie(name),
+  store:store,
   
   /*ui thread communication*/
   send:(type="default",data="")=>self.postMessage([type,data]),
@@ -50,5 +50,7 @@ self.onmessage=e=>{
   }
   
   if(ev=="back")app.body.remove({tag:"modal",position:"last"})
+  
+  if(ev=="store")store.raw=data
 }
 

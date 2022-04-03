@@ -1,4 +1,5 @@
 css.selector("img",{
   margin:"5px auto",
-  width:"calc(100% - 10px)"
+  width:"100%",
+  height:"auto",
 })

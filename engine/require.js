@@ -24,8 +24,10 @@ const requireFactory=function(scope){
     /*support redirects changing the scope of the script*/path=request.responseURL
     
     if (request.status>=200&&request.status<=299){
-    if(opt.async)return new Function(`return async function(){try{let module={};let require=requireFactory("${path}");${request.responseText};return module.exports||{}}catch(e){console.log("%cModule Error - ","color:red;font-weight:600",\`\${e.name}: \${e.message}\nin file ${path}\`);self.close()}}`)(/*double exec due to child func*/)(...(opt.args||opt.arguments||[]));
-    else return new Function(`try{let module={};let require=requireFactory("${path}");${request.responseText};return module.exports||{}}catch(e){console.log("%cModule Error - ","color:red;font-weight:600",\`\${e.name}: \${e.message}\nin file ${path}\`);self.close()}`)(...(opt.args||opt.arguments||[]))
+    if(opt.async)return new Function(`return async function(){try{let module={};let require=requireFactory("${path}");${request.responseText};
+    return module.exports||{}}catch(e){console.log("%cModule Error - ","color:red;font-weight:600",\`\${e.name}: \${e.message}\nin file ${path}\`);self.close()}}`)(/*double exec due to child func*/)(...(opt.args||opt.arguments||[]));
+    else return new Function(`try{let module={};let require=requireFactory("${path}");${request.responseText};
+    return module.exports||{}}catch(e){console.log("%cModule Error - ","color:red;font-weight:600",\`\${e.name}: \${e.message}\nin file ${path}\`);self.close()}`)(...(opt.args||opt.arguments||[]))
     
     }
     

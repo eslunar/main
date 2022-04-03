@@ -38,6 +38,6 @@ const css ={
     return this
   },
   convert(obj={}){
-    return Object.keys(obj).filter(e=>e).map(e=>`${e.split("").map(e=>/[A-Z]/.test(e)?" "+e.toLowerCase():e).join("").trim().replaceAll(" ","-")}:${String(obj[e])}`).join(";")
+    return Object.keys(obj).filter(e=>e).map(e=>`${e.split("").map(e=>/[A-Z]/.test(e)?" "+e.toLowerCase():e).join("").trim().replaceAll(" ","-")}:${e=="content"?`"${String(obj[e])}"`:String(obj[e])}`).join(";")
   }
 }

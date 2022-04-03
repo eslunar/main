@@ -43,7 +43,7 @@ body{
 
 
 /*libraries*/
-let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js"]
+let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js","/engine/store.js"]
 let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
 let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js"]
@@ -67,6 +67,7 @@ function start(){
     manifest.id=e;
     manifest.main=manifest.threads[e]
     const worker = new Worker(manifest.url)
+    worker.postMessage(["store",JSON.parse(store.store||"{}")[manifest.id]])
     worker.postMessage(["setup" ,manifest])
     worker.onmessage=(e)=>{
       let ev=e.data[0]
@@ -111,8 +112,17 @@ function start(){
               
             if(ev=="push-state"&&data=="main")history.pushState(null,null)
             
-          
+            
+            if(ev=="store"){
+              console.log(data)
+              let dt = JSON.parse(store.store||"{}")
+              dt[data.from]=data.data
+              store.store=JSON.stringify(dt)
+            }
+            
     }
+    
+    
     worker.onerror=(e)=>{console.log("%cEngine Error","color:red;font-weight:600","\n"+e.message+"\nps.beta.js v"+version);worker.terminate()}
     return {[e]:worker}
   }))

@@ -15,6 +15,7 @@ css.selector("body",{
   color:"var(--text)",
   
   display:"flex",
+  flex:"none",
   alignItems:"flex-start",
   justifyContent:"flex-start",
   flexDirection:"column",
