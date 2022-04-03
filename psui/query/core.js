@@ -83,6 +83,11 @@ const __query__ = function(children,query){
   
   if(query.html)kids=kids.filter(e=>test(new Element(e).html(),query.html))
   
+  /*return positioned values*/
+  if(query.position=="first")kids=[kids[0]]
+  if(query.position=="last")kids=[kids.pop()]
+  if(typeof query.position=="number")kids=[kids[query.position]||kids.pop()]
+  
   kids=kids.map(e=>new Element(e))
   return kids
 }

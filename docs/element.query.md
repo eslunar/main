@@ -41,3 +41,4 @@ Queries are infinitely nestable and use booleans for truthy matches, RegExp for 
 - `child` - type:query, match direct children.
 - `descendant` - type:query, match all descending children.
 - `root` - type:query, match the last ancestor that doesnt have a parent.
+- `position` - type:special, returns an element in a specific position, a `number` value defines a specific position, `first` string returns the first value, `last` string returns the last value.

@@ -19,7 +19,6 @@ app.body.add(butt)
 - Quick xml and html parsing
 - ⚡ fast DOM manipulation
 - Advance element Query system
-- Dynamic module caching for offline support
 - Extendable via plugins 🔗
 - API packed!
 
@@ -59,7 +58,7 @@ So I figured why don't the client do some work too, share the work and keep serv
 
 With PlayScript you can make web scraping apps, search engines, clones, anything your heart desires... and still host it all for free on Github or Vercel!
 
-Ever since NodeJS, no one seems to care about front-end JS anymore, but years have past, hardware became cheaper and more powerful device are online visiting your site, **lets take advantage!**
+Ever since NodeJS, no one seems to care about front-end JS anymore, but years have past, hardware became cheaper and more powerful devices are online visiting your site, **lets take advantage!**
 
 **Sidenote** playscript was built with es2017 in mind, which includes async / await and such, and I don't plan to go lower any time soon, majority of the internet userbase has access to modern browsers, so adding support to older browsers just seem counter productive and adds to the framework's size (which obviously means a slower response time).
 

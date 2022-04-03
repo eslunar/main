@@ -48,5 +48,7 @@ self.onmessage=e=>{
     ref.lastEvent=ref.raw.events[data.type]
     ref.lastEvent()
   }
+  
+  if(ev=="back")app.body.remove({tag:"modal",position:"last"})
 }
 

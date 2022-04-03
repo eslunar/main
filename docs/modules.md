@@ -20,7 +20,6 @@ return function Greet(person){
 ### Importing code
 You can import values using the `require` function, but bare in mind these rules:
 
-- Only for scripts.
 - Scoped, based on the location of the current active file calling the function.
 - Automatically appends the `.js` extension to paths without extensions.
 - Synchronous by default, but can be async by passing `async:true` to the options argument.

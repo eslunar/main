@@ -46,9 +46,9 @@ body{
 let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js"]
 let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
-let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js"]
+let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js"]
 
-/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",/*css styles*/"/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js"].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
+/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
    store.script=e.join("\n")
    store.version=version
    start()
@@ -89,8 +89,8 @@ function start(){
           let setAttr=(elem,attr)=>{Object.keys(attr).forEach(e=>{ if(e in elem)elem[e]=String(attr[e]); else elem.setAttribute(e,String(attr[e])) })}
           if(data.html!==undefined)(document.querySelector(`[_=${data.id}]`)||{}).innerHTML=String(data.html)
           if(data.attr!==undefined)setAttr(document.querySelector(`[_=${data.id}]`)||document.createElement("div"),data.attr)
-          if(data.html!==undefined)eventPool.forEach(e=>{
-            /*rerendering html unbinds event listeners affiliated with it, this is a refresher function*/if(String(data.html).includes(e.id))(document.querySelector(`[_=${e.id}]`)||{})[e.type]=eventHandler(e.id,e.type)
+          eventPool.forEach(e=>{
+            /*rerendering html unbinds event listeners affiliated with it, this is a refresher function*/(document.querySelector(`[_=${e.id}]`)||{})[e.type]=eventHandler(e.id,e.type)
           })
         }
           
@@ -109,13 +109,18 @@ function start(){
               }
             }
               
-            
+            if(ev=="push-state"&&data=="main")history.pushState(null,null)
             
           
     }
     worker.onerror=(e)=>{console.log("%cEngine Error","color:red;font-weight:600","\n"+e.message+"\nps.beta.js v"+version);worker.terminate()}
     return {[e]:worker}
   }))
+  
+  window.addEventListener("popstate",()=>{
+    threads.main.postMessage(["back"])
+  })
+  
   
 }
 
