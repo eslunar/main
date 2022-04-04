@@ -43,12 +43,12 @@ body{
 
 
 /*libraries*/
-let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js","/engine/store.js"]
+let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js","/engine/store.js","/engine/fetch.js"]
 let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
 let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js"]
 
-/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
+/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js","/psui/css/bar.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
    store.script=e.join("\n")
    store.version=version
    start()

@@ -1,6 +1,7 @@
 /*set aliases to engines*/const app={
   html:txml,
   store:store,
+  fetch:Fetch,
   
   /*ui thread communication*/
   send:(type="default",data="")=>self.postMessage([type,data]),
