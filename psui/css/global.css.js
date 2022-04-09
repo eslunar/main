@@ -34,9 +34,21 @@ css.selector("body",{
 css.selector("[fill=\"\"]",{
   width:"100%",
   height:"100%"
+}).selector("[fill=x]",{
+  width:"100%"
+}).selector("[fill=y]",{
+  height:"100%"
 })
+
+
 
 css.selector("[stack=bottom] > *",{
   position:"absolute",
   marginTop:"auto"
+})
+
+css.selector("[hue=\"\"]",{
+  color:"var(--hue)"
+}).selector("[bold]",{
+  fontWeight:"bold"
 })

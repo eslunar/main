@@ -50,9 +50,11 @@ self.onmessage=e=>{
     ref.lastEvent()
   }
   
-  if(ev=="back")app.body.remove({tag:"modal",position:"last"})
+  /*removes the last modal from the app on back pressed, native push*/if(ev=="back")app.body.remove({tag:"modal",position:"last"})
   
   if(ev=="store")store.raw=data
   
+  
+  /*pushes input changes to their pre*/if(ev=="reflect-input")(app.body.query({stamp:data.id})||new Element("input")).raw.attributes.value=data.val
 }
 

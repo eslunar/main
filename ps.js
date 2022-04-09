@@ -48,7 +48,7 @@ let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
 let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js","/psui/icon/core.js"]
 
-/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js","/psui/css/bar.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
+/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js","/psui/css/bar.css.js","/psui/css/edit.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
    store.script=e.join("\n")
    store.version=version
    start()
@@ -127,15 +127,14 @@ function start(){
     return {[e]:worker}
   }))
   
-  window.addEventListener("popstate",()=>{
+  /*closes modals and pages in stack on app back*/window.addEventListener("popstate",()=>{
     threads.main.postMessage(["back"])
   })
   
-  new MutationObserver(e=>{
-    e.forEach(e=>{
-        if(e.type=="attributes")threads.main.postMessage(["reflect",{id:e.target.getAttribute("_"),type:e.attributeName,val:String(e.target[e.attributeName]||e.target.getAttribute(e.attributeName))}])
-    })
-  }).observe(document.body,{attributes:true,subtree:true})
+  /*reflects changes made to inputs and text areas, only to main thread for obvious reasons😊*/document.addEventListener("keyup",e=>{
+    let x=document.activeElement
+    threads.main.postMessage(["reflect-input",{id:x.getAttribute("_"),val:x.value}])
+  })
   
   
 }
