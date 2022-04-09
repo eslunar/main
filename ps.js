@@ -12,6 +12,14 @@ manifest.origin=location.href
 /*current version*/const version=0.1
 /*active event listeners*/var eventPool=[]
 
+/*delay window load events*/var appIsReady=false
+function mhmm(){
+  let scr=document.createElement("script")
+  scr.src="about:blank"
+  scr.onerror=e=>appIsReady?scr.remove():(scr.remove(),mhmm())
+  scr.onload=e=>appIsReady?scr.remove():(scr.remove(),mhmm())
+  document.head.appendChild(scr)
+};mhmm()
 
 /*app loading screen*/document.body=document.body||document.createElement("body")
 document.body.innerHTML=manifest.splash||`
@@ -48,11 +56,11 @@ let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
 let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js","/psui/icon/core.js"]
 
-/*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js","/psui/css/bar.css.js","/psui/css/edit.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
+/*library builder*/Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js","/psui/css/bar.css.js","/psui/css/edit.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
    store.script=e.join("\n")
    store.version=version
    start()
-}).catch(e=>location.href=location.href); else start()
+}).catch(e=>location.href=location.href);
 
 
 /*When app is ready to start worker*/
@@ -93,6 +101,7 @@ function start(){
           eventPool.forEach(e=>{
             /*rerendering html unbinds event listeners affiliated with it, this is a refresher function*/(document.querySelector(`[_=${e.id}]`)||{})[e.type]=eventHandler(e.id,e.type)
           })
+          /*enable window load event to fire on first app paint, useful to see vercel previews and adsense support*/appIsReady=true
         }
           
           /*register events*/if(ev=="event")if(data.from=="main"){

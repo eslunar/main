@@ -44,7 +44,7 @@ css.selector("[fill=\"\"]",{
 
 css.selector("[stack=bottom] > *",{
   position:"absolute",
-  marginTop:"auto"
+  bottom:0,
 })
 
 css.selector("[hue=\"\"]",{
