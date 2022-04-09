@@ -4,7 +4,7 @@ Element.prototype.refresh=function RefreshNodes(type){
   
   elems.filter(e=>e).forEach(function(e){
     let id=e.attributes._
-    /*set ID*/e.attributes._=id||"id"+app.uuid(10)
+    /*set ID*/e.attributes._=id||"_"+app.uuid(10)
     id=e.attributes._
     
     /*create parental binding*/e.children.filter(e=>typeof e=="object").forEach(n=>n.parent=e)

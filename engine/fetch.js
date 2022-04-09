@@ -5,7 +5,7 @@ const Fetch=function(url="https://google.com",opt={}){
     request.open(opt.method||'GET',url, false);
     request.send(null)
     
-    res.body=request.responseText
+    res.body=request.response
     res.status=request.status
   } catch(e){
     res.error=e

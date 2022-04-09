@@ -1,8 +1,8 @@
 css.selector("bar",{
-  background:"var(--hue)",
+  background:"var(--bg)",
   boxShadow:"0px 0px 4px 4px var(--shadow)",
   zIndex:2,
-  color:"white",
+  color:"var(--hue)",
   opacity:.9,
   
   width:"calc(100% - 24px)",

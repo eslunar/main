@@ -7,7 +7,7 @@
 const cs=document.currentScript;
 /*web app manifest*/const manifest=JSON.parse(cs.innerHTML)||{}
 manifest.origin=location.href
-/*library host*/let csl=cs.src.split("/");csl.pop();const root=csl.join("/")
+/*library host*/let csl=cs.src.split("/");csl.pop();const root=csl.join("/");manifest.root=root;
 /*localStorage support*/let store;try{localStorage.test="true?";store=localStorage}catch(e){store={}}
 /*current version*/const version=0.1
 /*active event listeners*/var eventPool=[]
@@ -46,7 +46,7 @@ body{
 let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js","/engine/store.js","/engine/fetch.js"]
 let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
-let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js"]
+let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js","/psui/icon/core.js"]
 
 /*library builder*/if(version!=store.version||(manifest.flags||"").includes("dev"))Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js","/psui/css/bar.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
    store.script=e.join("\n")
@@ -131,10 +131,17 @@ function start(){
     threads.main.postMessage(["back"])
   })
   
+  new MutationObserver(e=>{
+    e.forEach(e=>{
+        if(e.type=="attributes")threads.main.postMessage(["reflect",{id:e.target.getAttribute("_"),type:e.attributeName,val:String(e.target[e.attributeName]||e.target.getAttribute(e.attributeName))}])
+    })
+  }).observe(document.body,{attributes:true,subtree:true})
+  
   
 }
 
 window.addEventListener('load', (event) => {
+  document.querySelectorAll("body")[1].remove()
   /*register dynamic web manifest and service worker*/let mn=document.createElement("link")
   mn.rel="manifest"
   mn.href="data:application/manifest+json,"+encodeURIComponent(JSON.stringify({

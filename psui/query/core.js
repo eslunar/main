@@ -11,7 +11,7 @@ const __query__ = function(children,query){
   
   /*checks for rx or direct matches between two values*/const test=(sub,testr)=>{
     //console.warn(sub,testr)
-    if(testr instanceof RegExp)return testr.test(sub); else if(typeof testr=="boolean")return !!sub; else return testr==sub}
+    if(testr instanceof RegExp)return testr.test(sub); else if(typeof testr=="boolean")return typeof sub=="undefined"; else return testr==sub}
   
   /*id attribute*/if(query.id)kids=kids.filter(e=>test(e.attributes.id,query.id))
   

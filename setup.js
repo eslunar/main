@@ -53,5 +53,6 @@ self.onmessage=e=>{
   if(ev=="back")app.body.remove({tag:"modal",position:"last"})
   
   if(ev=="store")store.raw=data
+  
 }
 

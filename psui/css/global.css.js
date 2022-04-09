@@ -3,13 +3,22 @@
   "--text":"#454545",
   "--bg":"#fcfcfc",
   "--bg2":"#dcdcdc",
-  "--shadow":"#00000015"
+  "--shadow":"#00000015",
+  "width":"100%",
+  "height":"100%",
 })
+
 
 css.selector("body",{
   padding:0,
   border:0,
   margin:0,
+  
+  width:"100%",
+  height:"100%",
+  overflow:"auto",
+  position:"relative",
+  
   
   background:"var(--bg)",
   color:"var(--text)",
@@ -20,4 +29,14 @@ css.selector("body",{
   justifyContent:"flex-start",
   flexDirection:"column",
   
+})
+
+css.selector("[fill=\"\"]",{
+  width:"100%",
+  height:"100%"
+})
+
+css.selector("[stack=bottom] > *",{
+  position:"absolute",
+  marginTop:"auto"
 })
