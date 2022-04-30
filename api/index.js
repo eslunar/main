@@ -1,4 +1,4 @@
-axios=require("axios")
+request=require("./request")
 
 const allowCors = fn => async (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', true)
@@ -18,7 +18,9 @@ const allowCors = fn => async (req, res) => {
 }
 
 const handler = (req, res) => {
-  axios.get("https://google.com").then(res.json)
+  let r=new request()
+  r.createRequest("https:google.com","GET",null,{},(err,body,status,head)=>res.json({err,body,status,head}))
+  r.sendRequest()
 }
 
 module.exports = allowCors(handler)
