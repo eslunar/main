@@ -12,7 +12,7 @@
   listen:res=>app.listeners.push(res),
   
   /*utilities*/
-  uuid:UtilUUID,repeat:UtilRepeat,print:UtilPrint,
+  uuid:UtilUUID,repeat:UtilRepeat,print:UtilPrint,icon:InjectIcon,
   
   /*data registers*/
   interfaces:{},
@@ -34,6 +34,7 @@ self.onmessage=e=>{
     app.moduleCache=app.manifest.moduleCache
     let require=requireFactory(data.origin)
     /*bind body to ui thread*/app.body=new Element("<body></body>")
+    /*set theme*/css.theme(app.manifest.theme||"light")
     app.send("bind-body",[app.manifest.id,app.body.attr("_")])
     require(data.main||"/index.js",app.manifest)
   }
@@ -47,7 +48,7 @@ self.onmessage=e=>{
   if(ev=="event")if(app.body.query({stamp:data.id})){
     let ref = app.body.query({stamp:data.id})
     ref.lastEvent=ref.raw.events[data.type]
-    ref.lastEvent()
+    ref.lastEvent({target:ref.query({stamp:data.target})||ref})
   }
   
   /*removes the last modal from the app on back pressed, native push*/if(ev=="back")app.body.remove({tag:"modal",position:"last"})

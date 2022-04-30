@@ -8,9 +8,16 @@ app.body.html(`<flex snap fill>
 
 </flex>
 <flex fill>
-<bar>AudioLuv</bar>
-<button>view</button>
+<bar>${app.icon("back")}AudioLuv</bar>
+<flex id="x"></flex>
 </flex>
 </flex>`)
 
-app.body.query({text:"view"}).on("click",e=>new Page("/index.html",{q:"hi boo"}))
+t=app.body.query({id:"x"})
+t.template("<li>{t}</li>")
+t.list([{t:1},{t:2}])
+t.push([{t:"whyy"},{t:"me"}])
+t.select(alert)
+t.insert({t:"penny vir dai kop"},2,true)
+app.body.add(new Element("<button>press me</button>").on("click",()=>css.theme("dark    ")))
+app.body.query({tag:"button"}).text("hello")

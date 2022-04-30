@@ -52,9 +52,9 @@ body{
 
 /*libraries*/
 let l_engines=["/engine/txml.js","/engine/require.js","/engine/interface.js","/engine/store.js","/engine/fetch.js"]
-let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js"]
+let l_util=["/util/repeat.js","/util/uuid.js","/util/print.js","/util/icon.js"]
 let l_misc=["/misc/alert.js","/misc/console.js"]
-let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js","/psui/icon/core.js"]
+let l_elem=["/psui/element/core.js","/psui/element/nodes.js","/psui/element/refresh.js","/psui/element/add.js","/psui/element/remove.js","/psui/element/html.js","/psui/element/text.js","/psui/element/attr.js","/psui/element/css.js","/psui/element/on.js","/psui/element/list.js","/psui/element/push.js","/psui/element/pop.js","/psui/element/insert.js","/psui/element/template.js","/psui/element/select.js","/psui/element/children.js","/psui/query/core.js","/psui/css/core.js","/psui/anchor/core.js","/psui/modal/core.js","/psui/modal/page.js"]
 
 /*library builder*/Promise.all([...l_engines,...l_util,...l_misc,...l_elem,"/setup.js",...(/*css styles*/(manifest.flags||"").includes("ui")?["/psui/css/global.css.js","/psui/css/button.css.js","/psui/css/image.css.js","/psui/css/flex.css.js","/psui/css/text.css.js","/psui/css/bar.css.js","/psui/css/edit.css.js"]:[])].map(e=>fetch(root+e))).then(e=>Promise.all(e.map(e=>e.text()))).then(e=>{ /*successful build*/
    store.script=e.join("\n")
@@ -80,7 +80,7 @@ function start(){
     worker.onmessage=(e)=>{
       let ev=e.data[0]
       let data=e.data[1]
-      let eventHandler=(id,type)=>event=>worker.postMessage(["event",{id,type}])/*runs each time an event is fired, dont change*/
+      let eventHandler=(id,type)=>event=>worker.postMessage(["event",{id,type,target:event.target.getAttribute("_")}])/*runs each time an event is fired, dont change*/
     
       if(ev=="log")console.log(...data)
       if(ev=="alert")alert(data)
@@ -98,6 +98,7 @@ function start(){
           let setAttr=(elem,attr)=>{Object.keys(attr).forEach(e=>{ if(e in elem)elem[e]=String(attr[e]); else elem.setAttribute(e,String(attr[e])) })}
           if(data.html!==undefined)(document.querySelector(`[_=${data.id}]`)||{}).innerHTML=String(data.html)
           if(data.attr!==undefined)setAttr(document.querySelector(`[_=${data.id}]`)||document.createElement("div"),data.attr)
+          console.log(eventPool)
           eventPool.forEach(e=>{
             /*rerendering html unbinds event listeners affiliated with it, this is a refresher function*/(document.querySelector(`[_=${e.id}]`)||{})[e.type]=eventHandler(e.id,e.type)
           })

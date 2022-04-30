@@ -4,5 +4,8 @@ function Element(elem,opt){
   
   /*clones element*/this.clone=()=>app.html.stringify([this.raw])
   
+  /*get stamp*/this.stamp=()=>this.raw.attributes._
+  
   this.refresh("create")
+  return this
 }

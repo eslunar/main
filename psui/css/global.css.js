@@ -1,9 +1,5 @@
 /*variables*/css.selector(":root",{
   "--hue":"#e91e63",
-  "--text":"#454545",
-  "--bg":"#fcfcfc",
-  "--bg2":"#dcdcdc",
-  "--shadow":"#00000015",
   "width":"100%",
   "height":"100%",
 })
@@ -39,8 +35,6 @@ css.selector("[fill=\"\"]",{
 }).selector("[fill=y]",{
   height:"100%"
 })
-
-
 
 css.selector("[stack=bottom] > *",{
   position:"absolute",
