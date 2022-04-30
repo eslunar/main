@@ -1,5 +1,6 @@
-function _event(e){
-  console.log(this,e)
+function _event(e,x){
+  let el=new Element(e)
+  el.lastEvent=app.events[x]
+  if(typeof el.lastEvent=="function")el.lastEvent()
 }
 
-const _eventHassle=[]

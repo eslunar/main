@@ -9,8 +9,16 @@ css.selector("bar",{
   padding:"20px 12px",
   
   fontWeight:"bold",
-  fontSize:"24px",
+  fontSize:"20px",
   
   position:"sticky",
   top:"0px"
+})
+
+css.selector("bar input,bar text",{
+  padding:0,
+  margin:"0 8",
+  marginRight:"auto",
+  color:"var(--hue)",
+  fontSize:"20px"
 })

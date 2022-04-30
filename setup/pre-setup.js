@@ -12,3 +12,4 @@ app.selectScan=function(children){
 }
 
 app.events={}
+app.scripts={}

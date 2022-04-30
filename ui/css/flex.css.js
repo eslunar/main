@@ -2,7 +2,7 @@ css.selector("flex",{
   display:"flex",
   position:"relative",
   overflow:"auto",
-  flex:"none",
+  flex:"0 0 auto",
   alignItems:"flex-start",
   justifyContent:"flex-start",
   flexDirection:"column",

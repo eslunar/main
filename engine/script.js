@@ -1,18 +1,17 @@
-const scriptCache={}
 function scriptFactory(scope=location.href.split("?")[0]){
   return (path="index",opt={})=>new Promise((res,rej)=>{
    /*require data based on where the file was found, like in nodejs */path=new URL(path,scope).href
   /*appends a .js extension to files without extensions*/path.split("/").pop().includes(".")?"":opt.extend===true||opt.extend===undefined?path+=".js":""
   
-  if(scriptCache[path]===undefined){
+  if(app.scripts[path]===undefined){
     let x = new XMLHttpRequest()
-    x.onerror=console.error
-    x.onload=()=>x.status>=200&&x.status<=299?(scriptCache[path]=x.responseText,new Function(`
+    x.onerror=()=>console.error(`Importing ${path} failed`)
+    x.onload=()=>x.status>=200&&x.status<=299?(app.scripts[path]=x.responseText,new Function(`
   return async function Module(){
     const script=scriptFactory("${path}")
     const module = {}
     ${opt.prepend||""}
-    ${scriptCache[path]}
+    ${app.scripts[path]}
     ${opt.append||""}
     return module.exports
   }
@@ -25,7 +24,7 @@ function scriptFactory(scope=location.href.split("?")[0]){
         const script=scriptFactory("${path}")
         const module = {}
         ${opt.prepend||""}
-        ${scriptCache[path]}
+        ${app.scripts[path]}
         ${opt.append||""}
         return module.exports
       }

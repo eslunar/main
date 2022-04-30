@@ -12,7 +12,7 @@ css.selector("body",{
   
   width:"100%",
   height:"100%",
-  overflow:"auto",
+  overflow:"scroll",
   position:"relative",
   
   
@@ -20,7 +20,7 @@ css.selector("body",{
   color:"var(--text)",
   
   display:"flex",
-  flex:"none",
+  flex:"0 0 auto",
   alignItems:"flex-start",
   justifyContent:"flex-start",
   flexDirection:"column",
@@ -45,4 +45,9 @@ css.selector("[hue=\"\"]",{
   color:"var(--hue)"
 }).selector("[bold]",{
   fontWeight:"bold"
+})
+
+css.selector("::placeholder",{
+  color:"var(--hue)",
+  opacity:.8
 })
