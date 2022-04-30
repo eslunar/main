@@ -16,9 +16,9 @@ Promise.all([
  
  /*modals*/"ui/modal/core","ui/modal/page","ui/modal/alert",
  
- /*misc*/"ui/selector/core",
+ /*misc*/"ui/selector/core","ui/css/core",
  
- /*css*/...(app.manifest.flags.includes("ui")?["ui/css/core","ui/css/global.css","ui/css/bar.css","ui/css/button.css","ui/css/image.css","ui/css/modal.css","ui/css/text.css","ui/css/flex.css","ui/css/edit.css"]:[]),
+ /*css*/...(app.manifest.flags.includes("ui")?["ui/css/global.css","ui/css/bar.css","ui/css/button.css","ui/css/image.css","ui/css/modal.css","ui/css/text.css","ui/css/flex.css","ui/css/edit.css"]:[]),
  
  /*utilities*/"util/uuid","util/after","util/every","util/repeat",
  "setup/event","setup/post-setup","setup/body-ready"].map(e=>fetch(app.manifest.root+e+".js")))
