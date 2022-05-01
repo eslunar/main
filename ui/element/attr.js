@@ -11,3 +11,8 @@ Element.prototype.attr=function(prop,val){
   
   return this
 }
+
+
+Element.prototype.hasAttr=function(prop){
+  return this.raw.hasAttribute(prop)
+}

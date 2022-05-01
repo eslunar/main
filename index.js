@@ -1,2 +1,2 @@
-body.html(`<flex id="getlink"></flex>`)
-console.log(body.query({id:"getlink"}))
+body.html(`<div></div><flex id="getlink"></flex>`)
+console.log(body.query({hasAttr:["id"]}).raw)

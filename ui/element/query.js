@@ -29,6 +29,8 @@ const __queer__ = function(ref,query){
 
   /*check attr*/if("attr" in query)Object.keys(query.attr).forEach(e=>ref=ref.filter(x=>test(query.attr[e],x.attr(e))))
   
+  /*has attr array*/if("hasAttr" in query)ref=ref.filter(e=>!!query.hasAttr.filter(x=>e.hasAttr(x)).length)
+  
   /*direct parent*/if("parent" in query)ref=ref.filter(e=>__queer__([e.parent()],query.parent)[0])
   
   /*direct child*/if("child" in query)ref=ref.filter(e=>__queer__(e.children(),query.child)[0])
