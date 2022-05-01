@@ -35,6 +35,8 @@ const __queer__ = function(ref,query){
   
   /*all decsendent children*/if("children" in query)ref=ref.filter(e=>__queer__(e.children(true),query.children)[0])
   
+  /*previous and next sibling*/if("sibling" in query)ref=ref.filter(e=>__queer__([e.previousSibling(),e.nextSibling()],query.sibling)[0])
+  
   
   if(query.position=="first")ref=[ref[0]]
   if(typeof query.position == "number")ref=[ref[query.position]||ref.pop()]
