@@ -12,7 +12,7 @@ Promise.all([
  "setup/pre-setup",
  /*engines*/"engine/script","engine/fetch",
  
- /*element*/"ui/element/core","ui/element/html","ui/element/text","ui/element/add","ui/element/remove","ui/element/parent","ui/element/children","ui/element/attr","ui/element/css","ui/element/query","ui/element/on","ui/element/misc","ui/element/list",
+ /*element*/"ui/element/core","ui/element/html","ui/element/text","ui/element/add","ui/element/remove","ui/element/children","ui/element/attr","ui/element/css","ui/element/query","ui/element/on","ui/element/misc","ui/element/list","ui/element/insert",
  
  /*modals*/"ui/modal/core","ui/modal/page","ui/modal/alert",
  

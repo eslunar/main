@@ -1,7 +1,5 @@
 const body=new Element(document.body)
 app.body=body
-const mutant=new MutationObserver(e=>e.forEach(e=>{}))
-mutant.observe(body.raw,{attributes:true,childList:true,subtree:true})
 
 
 css.theme(app.manifest.theme||"light")

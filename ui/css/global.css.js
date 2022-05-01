@@ -27,21 +27,17 @@ css.selector("body",{
   
 })
 
-css.selector("[fill=\"\"]",{
+css.selector("[fill]",{
   width:"100%",
   height:"100%"
-}).selector("[fill=x]",{
+}).selector("[fill=\"x\"]",{
   width:"100%"
-}).selector("[fill=y]",{
+}).selector("[fill=\"y\"]",{
   height:"100%"
 })
 
-css.selector("[stack=bottom] > *",{
-  position:"absolute",
-  bottom:0,
-})
 
-css.selector("[hue=\"\"]",{
+css.selector("[hue]",{
   color:"var(--hue)"
 }).selector("[bold]",{
   fontWeight:"bold"
