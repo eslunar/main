@@ -9,16 +9,16 @@ Element.prototype.query=function(q){
 
 const __queer__ = function(ref,query){
   ref=ref.filter(e=>e)
-  let test=function(prop,val){
+  let test=function(prop,val,act){
     if(prop instanceof RegExp)return prop.test(val)
-    else return val==prop
+    else return act=="in"?prop.trim().includes(val.trim()):val==prop
   }
   
   /*check type*/if("type" in query)ref=ref.filter(e=>test(query.type,e.raw.tagName.toLowerCase()))
   
   /*check id*/if("id" in query)ref=ref.filter(e=>test(query.type,e.attr("id")))
   
-  /*check class*/if("class" in query)ref=ref.filter(e=>test(query.class,e.attr("class")))
+  /*check class*/if("class" in query)ref=ref.filter(e=>test(query.class,e.attr("class"),"in"))
   
   /*check text*/if("text" in query)ref=ref.filter(e=>test(query.text,e.text()))
   

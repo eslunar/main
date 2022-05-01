@@ -1,7 +1,7 @@
 body.html(`<flex></flex>
-<bar></bar>
+<bar class=" ve x "></bar>
 <div><div>`)
 
 console.log(body.query({sibling:{
-  type:"div"
+  class:"ve"
 }}).raw)
