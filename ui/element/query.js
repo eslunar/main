@@ -16,13 +16,13 @@ const __queer__ = function(ref,query){
   
   /*check type*/if("type" in query)ref=ref.filter(e=>test(query.type,e.raw.tagName.toLowerCase()))
   
-  /*check id*/if("id" in query)ref=ref.filter(e=>test(query.type,e.attr("id")))
+  /*check id*/if("id" in query)ref=ref.filter(e=>test(query.id,e.attr("id")))
   
   /*check class*/if("class" in query)ref=ref.filter(e=>test(query.class,e.attr("class"),"in"))
   
   /*check text*/if("text" in query)ref=ref.filter(e=>test(query.text,e.text()))
   
-  /*check html*/if("html" in query)ref=ref.filter(e=>test(query.text,e.html()))
+  /*check html*/if("html" in query)ref=ref.filter(e=>test(query.html,e.html()))
   
   /*check style*/if("css" in query)Object.keys(query.css).forEach(e=>ref=ref.filter(x=>test(query.css[e],x.css(e))))
   

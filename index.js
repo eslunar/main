@@ -1,7 +1,2 @@
-body.html(`<flex></flex>
-<bar class=" ve x "></bar>
-<div><div>`)
-
-console.log(body.query({sibling:{
-  class:"ve"
-}}).raw)
+body.html(`<flex id="getlink"></flex>`)
+console.log(body.query({id:"getlink"}))
