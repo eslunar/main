@@ -1,6 +1,6 @@
 /*declare app*/const app={}
 /*get currentScript to parse manifest*/app.script=document.currentScript
-/*parse manifest*/app.manifest=JSON.parse(app.script.innerHTML||"{}")
+/*parse manifest*/eval("app.manifest="+(app.script.innerHTML||"{}"))
 /*app flags*/app.manifest.flags=(app.manifest.flags||"").split(" ").filter(e=>e)
 /*library root*/app.manifest.root=new URL(app.script.src).origin+"/"
 /*entry path*/app.manifest.currentEntry=location.href
@@ -12,7 +12,7 @@ Promise.all([
  "setup/pre-setup",
  /*engines*/"engine/script","engine/fetch",
  
- /*element*/"ui/element/core","ui/element/html","ui/element/text","ui/element/add","ui/element/remove","ui/element/parent","ui/element/children","ui/element/attr","ui/element/css","ui/element/query","ui/element/on","ui/element/misc",
+ /*element*/"ui/element/core","ui/element/html","ui/element/text","ui/element/add","ui/element/remove","ui/element/parent","ui/element/children","ui/element/attr","ui/element/css","ui/element/query","ui/element/on","ui/element/misc","ui/element/list",
  
  /*modals*/"ui/modal/core","ui/modal/page","ui/modal/alert",
  
