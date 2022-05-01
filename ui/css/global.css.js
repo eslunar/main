@@ -47,7 +47,4 @@ css.selector("[hue=\"\"]",{
   fontWeight:"bold"
 })
 
-css.selector("::placeholder",{
-  color:"var(--hue)",
-  opacity:.8
-})
+

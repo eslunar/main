@@ -1,2 +1,1 @@
-
-console.log(body)
+body.html("<input placeholder=hi />")
