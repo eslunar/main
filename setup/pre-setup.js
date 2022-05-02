@@ -15,3 +15,6 @@ app.selectScan=function(children){
 
 app.events={}
 app.scripts={}
+
+app.local=location.hostname=="localhost"
+app.back=history.back
