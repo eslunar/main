@@ -1,5 +1,2 @@
-body.template("<flex><div>{text}</div></flex>")
+body.html(`<bar><svg fill=currentColor width="24" height="24" viewBox="0 0 24.00 24.00"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg><text>Title mmmmmm m mm nm nn  mmmmmmmmmmmmmm</text><svg fill=currentColor width="24" height="24" viewBox="0 0 24.00 24.00"><path d="M9.5 3a6.5 6.5 0 0 1 4.936 10.73l.271.27h.793l5 5-1.5 1.5-5-5v-.793l-.27-.27A6.5 6.5 0 1 1 9.5 3zm0 2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z"/></svg><svg fill=currentColor width="24" height="24" viewBox="0 0 24.00 24.00"><path d="M12 16a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm0-6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm0-6a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></bar>`)
 
-body.list([{text:"hi"},{text:"hello"}])
-body.select(e=>e.target.css("background","blue"))
-.push({text:"howdi"},0)

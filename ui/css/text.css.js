@@ -6,6 +6,9 @@ css.selector("p,h1,h2,h3,h4,h5,h6,text,paragraph,input,textarea,input::placehold
   background:"transparent",
   color:"var(--text)",
   outline:"none",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 })
 
 css.selector("text[size=\"tiny\"]",{

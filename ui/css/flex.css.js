@@ -24,14 +24,19 @@ css.selector("flex[snap]",{
   scrollSnapAlign:"start"
 })
 
-css.selector("flex[align=\"center\"]",{
-  alignItems:"center",
+css.selector("flex[x=\"center\"]",{
+  alignItems:"center"
+}).selector("flex[x=\"start\"]",{
+  alignItems:"flex-start"
+}).selector("flex[x=\"end\"]",{
+  alignItems:"flex-end"
+})
+
+css.selector("flex[y=\"center\"]",{
   justifyContent:"center"
-}).selector("flex[align=\"start\"]",{
-  alignItems:"flex-start",
+}).selector("flex[y=\"start\"]",{
   justifyContent:"flex-start"
-}).selector("flex[align=\"end\"]",{
-  alignItems:"flex-end",
+}).selector("flex[y=\"end\"]",{
   justifyContent:"flex-end"
 })
 
@@ -51,12 +56,7 @@ css.selector("flex[card]",{
   margin:"5px"
 })
 
-css.selector("flex[edge]",{
-  width:"calc( 100% - 20px)",
+css.selector("flex[margin]",{
   marginLeft:"auto",
   marginRight:"auto",
-}).selector("flex[edge=\"2\"]", {
-  width: "calc( 100% - 40px)",
-  marginLeft: "auto",
-  marginRight: "auto",
 })

@@ -3,6 +3,8 @@ app.version={
   alpha:"0.0.1"
 }
 
+app.query=Object.assign({},...location.search.slice(1).split("&").filter(e=>e).map(function loop(e){return {[decodeURIComponent(e.split("=")[0])]:decodeURIComponent(e.split("=")[1]||"")}}))
+
 app.selectors={}
 app.selectScan=function(children){
   children=children.map(e=>new Element(e))

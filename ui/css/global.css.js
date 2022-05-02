@@ -27,12 +27,12 @@ css.selector("body",{
   
 })
 
-css.selector("[fill]",{
+css.selector("img[fill],flex[fill]",{
   width:"100%",
   height:"100%"
-}).selector("[fill=\"x\"]",{
+}).selector("img[fill=\"x\"],flex[fill=\"x\"]",{
   width:"100%"
-}).selector("[fill=\"y\"]",{
+}).selector("img[fill=\"y\"],flex[fill=\"y\"]",{
   height:"100%"
 })
 
