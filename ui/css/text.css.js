@@ -31,7 +31,9 @@ css.selector("text[size=\"tiny\"]",{
   fontSize: "1.6rem"
 }).selector("text[size=\"xxxlarge\"]", {
   fontSize: "1.8rem"
-}).selector("text[size=\"jumbo\"]", {
+}).selector("text[size=\"huge\"]", {
   fontSize: "2rem"
+}).selector("text[size=\"jumbo\"]", {
+  fontSize: "3rem"
 }).selector("text[size=\"hero\"]", {
-  fontSize: "3rem"})
+  fontSize: "4rem"})
