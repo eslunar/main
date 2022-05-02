@@ -1,5 +1,2 @@
-body.add(new Element("<button>nav").on("click",e=>app.page("/index.html",{query:{
-  x:34,y:true,n:`""'':;_-..`
-}})))
+body.add(new Element("<button>nav").on("click",e=>console.log(e)))
 
-console.log(app.query)

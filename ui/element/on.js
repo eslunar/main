@@ -3,7 +3,7 @@ Element.prototype.on=function(event,val){
     if(!event.startsWith("on"))event="on"+event
     let id=app.uuid(50)
     app.events[id]=val
-    this.raw.setAttribute(event,`_event(this,"${id}")`)
+    this.raw.setAttribute(event,`_event(this,"${id}",event)`)
   } else return app.events[(this.raw.getAttribute(event)||"").split("\"")[1]]
   return this
 }
