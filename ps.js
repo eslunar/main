@@ -5,7 +5,7 @@
 /*library root*/app.manifest.root=new URL(app.script.src).origin+"/"
 /*entry path*/app.manifest.currentEntry=location.href
 /*create body*/document.body=document.body||document.createElement("body")
-/*create splash screen*/document.body.innerHTML=app.manifest.splash||`<style>load{width:35px;height:35px;border-radius:100%;border:5px solid #00000011;border-top:4px solid #e91e63;transform:rotate(0deg);animation:spin 800ms linear infinite}body{border:0;padding:0;margin:0;position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}@keyframes spin{to{transform:rotate(359deg)}}</style><load></load>`
+/*create splash screen*/document.body.innerHTML=app.manifest.splash||`<style>load{width:35px;height:35px;border-radius:100%;border:5px solid #00000011;border-top:4px solid #e91e63;transform:rotate(0deg);animation:spin 800ms linear infinite}body{border:0;padding:0;margin:0;position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:${app.manifest.theme=="dark"?"#232323":app.manifest.theme=="oled"?"#000000":"#fcfcfc"}}@keyframes spin{to{transform:rotate(359deg)}}</style><load></load>`
 
 Promise.all([
   /*fetches all building blocks of the framework and binds them as a blob script*/
