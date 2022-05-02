@@ -27,7 +27,7 @@ css.selector("body",{
   
 })
 
-css.selector("img[fill],flex[fill]",{
+css.selector("img[fill=\"\"],flex[fill=\"\"]",{
   width:"100%",
   height:"100%"
 }).selector("img[fill=\"x\"],flex[fill=\"x\"]",{
