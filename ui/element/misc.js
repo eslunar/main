@@ -18,3 +18,8 @@ Element.prototype.index=function(){
 Element.prototype.parent=function(){
   return this.raw.parentNode?new Element(this.raw.parentNode):undefined
 }
+
+Element.prototype.focus=function(){
+  this.raw.focus()
+  return this
+}
