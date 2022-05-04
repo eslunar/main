@@ -4,7 +4,7 @@ self.addEventListener("install", event => {
         caches
             .open("playscript")
             .then(cache => {
-                return cache.addAll(["index.html"]);
+                return cache.addAll([location.origin]);
             })
             .catch(err => console.log(err))
     );

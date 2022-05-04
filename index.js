@@ -1,2 +1,2 @@
-body.add("<load>")
+body.html("hello bob")
 

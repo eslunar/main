@@ -2,6 +2,7 @@
   "--hue":"#e91e63",
   "width":"100%",
   "height":"100%",
+  fontFamily:"sans-serif",
 })
 
 
