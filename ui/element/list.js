@@ -7,6 +7,7 @@ Element.prototype.template=function(str){
 Element.prototype.list=function(list){
   if(this.attr("template")){
     const temp=decodeURIComponent(this.attr("template"))
+    this.html("")
     this.html(...list.map(e=>{
       let t=temp
       Object.keys(e).forEach(x=>t=t.replaceAll(`{${x}}`,String(e[x])))
@@ -19,6 +20,7 @@ Element.prototype.list=function(list){
 
 Element.prototype.push=function(obj,pos){
   let temp=decodeURIComponent(this.attr("template"))
+  
   if(temp){
     Object.keys(obj).forEach(x=>temp=temp.replaceAll(`{${x}}`,String(obj[x])))
     this.insert(temp,pos)
