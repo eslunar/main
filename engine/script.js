@@ -3,6 +3,8 @@ function scriptFactory(scope=location.href.split("?")[0]){
    /*require data based on where the file was found, like in nodejs */path=new URL(path,scope).href
   /*appends a .js extension to files without extensions*/path.split("/").pop().includes(".")?"":opt.extend===true||opt.extend===undefined?path+=".js":""
   
+  if(app.manifest.flags.includes("dev"))console.log("require "+path)
+  
   if(app.scripts[path]===undefined){
     let x = new XMLHttpRequest()
     x.onerror=()=>console.error(`Importing ${path} failed`)
