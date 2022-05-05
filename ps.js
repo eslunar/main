@@ -27,7 +27,7 @@ let mt=document.createElement("meta")
 app.loadState="pending"
 function stallDom(){
   const script=document.createElement("script")
-  script.src="http://supa-backend.onrender.com/heatlh"
+  script.src="https://supa-backend.onrender.com/heatlh"
   script.id="stallDom"
   script.onload=e=>{
     document.querySelector("#stallDom").remove()
