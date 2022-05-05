@@ -11,11 +11,10 @@ function scriptFactory(scope=location.href.split("?")[0]){
     x.onload=()=>x.status>=200&&x.status<=299?(app.scripts[path]=x.responseText,new Function(`
   return async function Module(){
     const script=scriptFactory("${path}")
-    const module = {}
     ${opt.prepend||""}
     ${app.scripts[path]}
     ${opt.append||""}
-    return module.exports
+    return {}
   }
 `)()(...(opt.args||opt.arguments||[])).then(res).catch(rej)):rej(x)
     x.open("GET",path)
@@ -24,11 +23,10 @@ function scriptFactory(scope=location.href.split("?")[0]){
     new Function(`
       return async function Module(){
         const script=scriptFactory("${path}")
-        const module = {}
         ${opt.prepend||""}
         ${app.scripts[path]}
         ${opt.append||""}
-        return module.exports
+        return {}
       }
     `)()(...(opt.args || opt.arguments || [])).then(res).catch(rej)
   }

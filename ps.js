@@ -8,8 +8,8 @@
 
 /*create splash screen*/
 let splashScreen=document.createElement("splash-screen")
-splashScreen.setAttribute("style",`position:fixed;z-index:999999999;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:${app.manifest.theme=="dark"?"#232323":app.manifest.theme=="oled"?"#000000":"#fcfcfc"}`)
-splashScreen.innerHTML=app.manifest.splash||`<style>load{width:35px;height:35px;border-radius:100%;border:5px solid #00000011;border-top:4px solid #e91e63;transform:rotate(0deg);animation:spin 800ms linear infinite}@keyframes spin{to{transform:rotate(359deg)}}</style><load></load>`
+if(window.top===window.self){splashScreen.setAttribute("style",`position:fixed;z-index:999999999;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:${app.manifest.theme=="dark"?"#232323":app.manifest.theme=="oled"?"#000000":"#fcfcfc"}`)
+splashScreen.innerHTML=app.manifest.splash||`<style>load{width:35px;height:35px;border-radius:100%;border:5px solid #00000011;border-top:4px solid #e91e63;transform:rotate(0deg);animation:spin 800ms linear infinite}@keyframes spin{to{transform:rotate(359deg)}}</style><load></load>`}
 document.documentElement.appendChild(splashScreen)
 splashScreen=undefined;
 
@@ -24,18 +24,18 @@ let mt=document.createElement("meta")
   document.head.appendChild(mt)
 
 
-app.load="pending"
+app.loadState="pending"
 function stallDom(){
   const script=document.createElement("script")
-  script.src="http://about:blank"
+  script.src="http://supa-backend.onrender.com/heatlh"
   script.id="stallDom"
   script.onload=e=>{
     document.querySelector("#stallDom").remove()
-    app.load=="complete"?document.querySelector("splash-screen").remove():stallDom()}
+    app.loadState=="complete"?document.querySelector("splash-screen").remove():stallDom()}
   script.onerror=e=>{
     document.querySelector("#stallDom").remove()
-    app.load=="complete"?document.querySelector("splash-screen").remove():stallDom()}
-  document.documentElement.appendChild(script)
+    app.loadState=="complete"?document.querySelector("splash-screen").remove():stallDom()}
+  document.head.appendChild(script)
 }
 stallDom()
 
@@ -47,11 +47,11 @@ Promise.all([
  
  /*element*/"ui/element/core","ui/element/html","ui/element/text","ui/element/add","ui/element/remove","ui/element/children","ui/element/attr","ui/element/css","ui/element/query","ui/element/on","ui/element/misc","ui/element/list","ui/element/insert",
  
- /*modals*/"ui/modal/core","ui/modal/page","ui/modal/alert",
+ /*modals*/"ui/modal/core","ui/modal/page",
  
  /*misc*/"ui/selector/core","ui/css/core",
  
- /*css*/...(app.manifest.flags.includes("ui")?["ui/css/global.css","ui/css/bar.css","ui/css/button.css","ui/css/image.css","ui/css/modal.css","ui/css/text.css","ui/css/flex.css","ui/css/load.css"]:[]),
+ /*css*/...(app.manifest.flags.includes("ui")?["ui/css/global.css","ui/css/bar.css","ui/css/button.css","ui/css/image.css","ui/css/modal.css","ui/css/text.css","ui/css/flex.css","ui/css/load.css","ui/modal/load"]:[]),
  
  /*utilities*/"util/uuid","util/after","util/every","util/repeat",
  "setup/event","setup/post-setup","setup/body-ready"].map(e=>fetch(app.manifest.root+e+".js")))

@@ -19,6 +19,7 @@ app.events={}
 app.scripts={}
 
 app.local=location.hostname=="localhost"
+app.framed=!(window.top===window.self)
 app.back=history.back
 
 /*register web manifest*/
