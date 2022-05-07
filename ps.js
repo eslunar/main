@@ -53,7 +53,7 @@ Promise.all([
  
  /*misc*/"ui/selector/core","ui/css/core",
  
- /*css*/...(app.manifest.flags.includes("ui")?["ui/css/global.css","ui/css/bar.css","ui/css/button.css","ui/css/image.css","ui/css/modal.css","ui/css/text.css","ui/css/flex.css","ui/css/load.css","ui/modal/load"]:[]),
+ /*css*/...(app.manifest.flags.includes("ui")?["ui/css/global.css","ui/css/bar.css","ui/css/button.css","ui/css/image.css","ui/css/modal.css","ui/css/text.css","ui/css/flex.css","ui/css/load.css","ui/modal/load","ui/modal/snack"]:[]),
  
  /*utilities*/"util/uuid","util/after","util/every","util/repeat",
  "setup/event","setup/post-setup","setup/body-ready"].map(e=>fetch(app.manifest.root+e+".js")))
