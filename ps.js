@@ -1,6 +1,8 @@
 /*declare app*/const app={}
 /*get currentScript to parse manifest*/app.script=document.currentScript
 /*parse manifest*/eval("app.manifest="+(app.script.innerHTML||"{}"))
+app.manifest=Object.assign(app.manifest,JSON.parse(localStorage.temp_cache||"{}"))
+delete localStorage.temp_cache5
 /*app flags*/app.manifest.flags=(app.manifest.flags||"").split(" ").filter(e=>e)
 /*library root*/app.manifest.root=new URL(app.script.src).origin+"/"
 /*entry path*/app.manifest.currentEntry=location.href
@@ -27,7 +29,7 @@ let mt=document.createElement("meta")
 app.loadState="pending"
 function stallDom(){
   const script=document.createElement("script")
-  script.src="https://supa-backend.onrender.com/heatlh"
+  script.src=app.manifest.root+"/ping"
   script.id="stallDom"
   script.onload=e=>{
     document.querySelector("#stallDom").remove()
@@ -43,7 +45,7 @@ stallDom()
 Promise.all([
   /*fetches all building blocks of the framework and binds them as a blob script*/
  "setup/pre-setup",
- /*engines*/"engine/script","engine/fetch",
+ /*engines*/"engine/script","engine/metadata","engine/fetch",
  
  /*element*/"ui/element/core","ui/element/html","ui/element/text","ui/element/add","ui/element/remove","ui/element/children","ui/element/attr","ui/element/css","ui/element/query","ui/element/on","ui/element/misc","ui/element/list","ui/element/insert",
  
