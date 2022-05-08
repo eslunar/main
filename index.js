@@ -1,1 +1,1 @@
-body.add(`<button onclick='app.snack("hello dkckrjf emvkve  dovke e ork kecjev elm wnkrk")' >hello`)
+body.add(`<button onclick='app.page("index.html")' >hello`)

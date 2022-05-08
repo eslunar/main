@@ -6,7 +6,7 @@ else window.addEventListener("load",app_first_launch)
 
 
 /*on app back pressed*/window.addEventListener("popstate",function(){
-  (body.query({attr:{type:"modal"},position:"last"})||new Element("<e/>")).remove()
+  (body.query({type:"modal",position:"last"})||new Element("<e/>")).remove()
 })
 
 /**/window.addEventListener("touchstart",e=>app.target=new Element(e.target))
