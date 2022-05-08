@@ -3,6 +3,11 @@
   "width":"100%",
   "height":"100%",
   fontFamily:"sans-serif",
+  
+})
+
+css.selector("::-webkit-scrollbar",{
+  width:"0 !important"
 })
 
 
