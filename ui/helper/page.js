@@ -12,13 +12,11 @@ function pageGen(scope){return function Page(url="index",opt={}){
   
   
   this.open=function(){
-    this.frame.attr("src",URL.createObjectURL(new Blob([`
-  <html>
+    this.frame.attr("srcdoc",`<html>
   <base href="${url}" />
-  <script src="${sessionStorage.getItem("prep")}" scope="${url}" root="${app.manifest.root+"/"}">${mn}</script>
+  <script src=${app.manifest.root}/ps.js scope="${url}">${mn}</script>
   </html>
-  `],{type:"text/html"})))
-    .raw.onload=e=>URL.revokeObjectURL(this.frame.attr("src"))
+  `)
     new Modal(this.frame).open()
     return this
   }

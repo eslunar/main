@@ -1,5 +1,4 @@
 /*declare app*/const app={}
-/*application code is wrapped in a function to be dynamically generated when using app.page*/function psStartFunction(){
 /*get currentScript to parse manifest*/app.scope=document.currentScript.getAttribute("scope")||location.href
 /*parse manifest*/app.manifest=JSON.parse(document.currentScript.innerHTML.trim()||"{}")
 /*app flags*/app.manifest.flags=(app.manifest.flags||"").split(" ").filter(e=>e)
@@ -89,7 +88,6 @@ if(app.manifest.flags.includes("fresh")||(!sessionStorage.getItem("psjs")))Promi
   .then(e=>Promise.all(e.map(e=>e.text())))
   .then(e=>/*run code globally*/{sessionStorage.setItem("psjs",e.join("\n"));setTimeout(e.join("\n"),0)})
   .catch(e=>/*if a resource fails to load, the page will refresh until all resources load successfully*/location.href=location.href)
-else /*if app pre scripts are cached, run from cache*/setTimeout(sessionStorage.getItem("psjs"),0)}
+else /*if app pre scripts are cached, run from cache*/setTimeout(sessionStorage.getItem("psjs"),0)
 
-/*url to cache startup*/sessionStorage.setItem("prep",URL.createObjectURL(new Blob(["const app={};"+String(psStartFunction)+";psStartFunction()"],{type:"application/javascript"})))
-psStartFunction()
+
