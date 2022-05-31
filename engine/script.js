@@ -8,7 +8,7 @@ function scriptFactory(scope=app.scope.split("?")[0]){
     /*init res for...*/let res;
     if(app.manifest.flags.includes("fresh")||(!sessionStorage.getItem(path))){
       /*scripts are cached in session storage and reused to save bandwidth and speed up cross referenced resources*/
-    /*fetch script*/res=await fetch(path).catch(e=>{return {offline:true}})
+    /*fetch script*/res=await fetch(path,{mode:"no-cors"}).catch(e=>{return {offline:true}})
     /*retry if offline*/if(res.offline)return await script(path)
     /*continue if online*/if(res.ok){
       res=await res.text().catch(e=>null)
