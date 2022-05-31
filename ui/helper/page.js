@@ -15,7 +15,7 @@ function pageGen(scope){return function Page(url="index",opt={}){
     this.frame.attr("src",URL.createObjectURL(new Blob([`
   <html>
   <base href="${url}" />
-  <script src="${sessionStorage.getItem("prep")}" scope="${url}" root="${app.root}">${mn}</script>
+  <script src="${sessionStorage.getItem("prep")}" scope="${url}" root="${app.manifest.root+"/"}">${mn}</script>
   </html>
   `],{type:"text/html"})))
     .raw.onload=e=>URL.revokeObjectURL(this.frame.attr("src"))
