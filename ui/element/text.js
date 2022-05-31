@@ -3,3 +3,4 @@ Element.prototype.text=function(...args){
   else return this.raw.innerText
   return this
 }
+

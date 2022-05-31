@@ -1,6 +1,6 @@
 PlayScript - Setting up
 ---
-Create an html file and refer to https://playscript.dev/ps.js in a script tag. Add an empty object into the script tag, this is your app's [manifest](./manifest.md), it defines your app and its entry point.
+Create an html file and refer to https://playscriptjs.github.io/ps.js in a script tag. Add an empty object into the script tag, this is your app's [manifest](./manifest.md), it defines your app and its entry point.
 
 ### `index.html`
 ```javascript
@@ -24,8 +24,6 @@ During setup, PlayScript automatically does the following:
 - Generates a web manifest
 - Registers a service worker
 - Imports dependencies
-
-This means that the minimal html file above is all thats required to start a PWA.
 
 ---
 **[Continue to modules](./modules.md)**

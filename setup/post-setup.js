@@ -1,8 +1,14 @@
 const body=new Element(document.body)
 app.body=body
-
-
-css.theme(app.manifest.theme||"light")
+/*init console*/if(app.manifest.flags.includes("console")){
+  let erudaC=new Element("<div>")
+  body.parent().add(erudaC)
+  eruda.init({container:erudaC.raw})
+}
 
 const script = scriptFactory()
-script(app.manifest.main,{prepend:"body.parent().add(app.globalCSS);"+(app.manifest.flags.includes("dev")?"await script('https://cdn.jsdelivr.net/npm/eruda@2.4.1/eruda.min.js',{extend:false});eruda.init()":""),append:"app.loadState='complete';"}).then(e=>e!==undefined?console.log(e):"").catch(console.error)
+script(app.manifest.main||"/index")
+.then(e=>{
+  app.loadState="complete"
+})
+

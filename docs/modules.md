@@ -13,12 +13,13 @@ greet("castiel")//logs hello castiel
 
 All modules (including the entry module) are async functions, which gives all modules top level async/await.
 
-##### About the `script` function
-- Accepts relative paths like CommonJS 
-- Accepts full URL's
-- Auto appends the `.js` extension to paths without extensions
-- return empty object as default
-
+---
+### Importing multiple scripts
+Use the async `scripts` function to load multiple scripts
+```javascript
+const mods = await scripts("mod1.js","mod2.js")
+```
+Returns an object collection of the imported modules, if the value is a function with a name,
 ---
 [Continue to manifest](./manifest.md)
 

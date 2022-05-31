@@ -1,4 +1,0 @@
-const spice=function(element){
-  
-  
-}

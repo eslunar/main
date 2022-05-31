@@ -7,3 +7,8 @@ Element.prototype.on=function(event,val){
   } else return app.events[(this.raw.getAttribute(event)||"").split("\"")[1]]
   return this
 }
+
+Elements.prototype.on = function(...args) {
+  this.raw.forEach(e => e.on(...args))
+  return this
+}

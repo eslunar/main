@@ -1,10 +1,10 @@
-Element.prototype.queryAll=function(q){
+Element.prototype.queryAll=function(q={}){
   return __queer__(this.children(true),q)
 
 }
 
-Element.prototype.query=function(q){
-  return this.queryAll(q)[0]
+Element.prototype.query=function(q={}){
+  return this.queryAll(q).raw[0]
 }
 
 const __queer__ = function(ref,query){
@@ -45,5 +45,5 @@ const __queer__ = function(ref,query){
   if(query.position=="last")ref=[ref.pop()]
   
   ref=ref.filter(e=>e)
-  return ref
+  return new Elements(ref)
 }

@@ -1,0 +1,1 @@
+return async e=>"hi"

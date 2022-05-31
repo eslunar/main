@@ -1,34 +1,40 @@
-function scriptFactory(scope=location.href.split("?")[0]){
-  return (path="index",opt={})=>new Promise((res,rej)=>{
-   /*require data based on where the file was found, like in nodejs */path=new URL(path,scope).href
-  /*appends a .js extension to files without extensions*/path.split("/").pop().includes(".")?"":opt.extend===true||opt.extend===undefined?path+=".js":""
-  
-  if(app.manifest.flags.includes("dev"))console.log("require "+path)
-  
-  if(app.scripts[path]===undefined){
-    let x = new XMLHttpRequest()
-    x.onerror=()=>console.error(`Importing ${path} failed`)
-    x.onload=()=>x.status>=200&&x.status<=299?(app.scripts[path]=x.responseText,new Function(`
-  return async function Module(){
-    const script=scriptFactory("${path}")
-    ${opt.prepend||""}
-    ${app.scripts[path]}
-    ${opt.append||""}
-    return {}
+function scriptFactory(scope=app.scope.split("?")[0]){
+  return async function script(path,...args){
+    /*check if is full path*/let iu = new RegExp('^([a-z]+://|//)', 'i')
+    /*connect packages*/path=Object.keys(app.manifest.packages).includes(path)?app.manifest.packages[path]:path;
+    /*traverse relative paths*/path=new URL(/*append .js extention*/iu.test(path)?path:path.split("/").pop().includes(".")?path:path+".js",scope).href
+    
+    
+    /*init res for...*/let res;
+    if(app.manifest.flags.includes("fresh")||(!sessionStorage.getItem(path))){
+      /*scripts are cached in session storage and reused to save bandwidth and speed up cross referenced resources*/
+    /*fetch script*/res=await fetch(path).catch(e=>{return {offline:true}})
+    /*retry if offline*/if(res.offline)return await script(path)
+    /*continue if online*/if(res.ok){
+      res=await res.text().catch(e=>null)
+      /*if retrieving body failed, maybe network changed*/if(res==null)return await script(path)
+      /*if everything goes a ok*/
+      sessionStorage.setItem(path,res)
+      if(app.manifest.flags.includes("log"))console.log("importing",path)
+    } else return {error:res.status}} else {
+      res=sessionStorage.getItem(path)
+      if(app.manifest.flags.includes("log"))console.log("stale importing",path)
+    }
+    
+    
+    
+    try{
+      /*check if data is a json object*/
+      return JSON.parse(res)
+    }catch(e){
+      return await Function(`return async function Module(){
+       const Page=pageGen("${path}")
+       const script=scriptFactory("${path}")
+       const scripts=scriptsFactory("${path}")
+       ${res}
+       return {}
+     }`)()(...args)
+    }
   }
-`)()(...(opt.args||opt.arguments||[])).then(res).catch(rej)):rej(x)
-    x.open("GET",path)
-    x.send()
-  } else {
-    new Function(`
-      return async function Module(){
-        const script=scriptFactory("${path}")
-        ${opt.prepend||""}
-        ${app.scripts[path]}
-        ${opt.append||""}
-        return {}
-      }
-    `)()(...(opt.args || opt.arguments || [])).then(res).catch(rej)
-  }
-  })
 }
+

@@ -1,19 +1,19 @@
 PlayScript
 ---
-A **Tiny** and **Powerful** JavaScript framework for building amazing web apps fast!
+A **Tiny** and **Powerful** front-end JavaScript framework for building amazing web apps fast!
 
 ##### Example:
 ```javascript
 butt = new Element("<button>press me</button>")
-butt.attr("onclick",e=>alert("HI MOM!"))
+ .on("click",e=>alert("HI MOM!"))
 body.add(butt)
 ```
 
 ##### With PSUI:
 ```javascript
-const ui = await script("//.../psui.js")
+const ui = await script("psui")
 const butt = ui.button("press me")
-butt.attr("click",e=>alert("HI AGAIN!"))
+ .on("click",e=>alert("HI AGAIN!"))
 body.add(butt)
 ```
 
@@ -23,12 +23,15 @@ body.add(butt)
 - Simple module import / exports
 - Easy DOM manipulation
 - Extended DOM query system
+- in-built icon pack
+- material ui pack
 - Auto PWA support
 - Compatible with other libraries
 - Extendable via plugins
+- in-built [console](//eruda.liriliri.com)
 - API Packed!
 
-And so much more, all under `30kb`. **Interested?**
+And so much more, all under `50kb`. **Interested?**
 
 ---
 ### Docs
@@ -49,12 +52,17 @@ And so much more, all under `30kb`. **Interested?**
 - [After](./docs/after.md)
 - [Every](./docs/every.md)
 
-[Reference](./docs/ref.md).<br/>More sources [here](https://playscript.dev).
+##### EXTRAS
+- [PSUI](./docs/psui/intro.md)
+- [PSMD](./docs/psmd.md)
+- [Icons](./docs/icons.md)
+
+Learn more [here](https://playscript.dev).
 
 ---
 ### Author
 Faizel Dealdrey Garoeb
 
-email - <dealdreygaroeb@gmail.com><br/>telegram - https://t.me/fjci9e
+email - <dealdreygaroeb@gmail.com><br/>telegram - https://t.me/PlayScriptJS
 
 happy coding!

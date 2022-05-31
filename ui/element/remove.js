@@ -4,3 +4,8 @@ Element.prototype.remove=function(e){
   if(typeof e=="object")this.queryAll(e).forEach(e=>e.remove())
   return this
 }
+
+Elements.prototype.remove = function(...args) {
+  this.raw.forEach(e => e.remove(...args))
+  return this
+}

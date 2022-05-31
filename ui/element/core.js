@@ -5,6 +5,12 @@ function Element(root,opt){
     let el=document.createElement("e")
     el.innerHTML=root
     this.raw=el.children[0]
+    el=undefined
   }
+  return this
+}
+
+function Elements(root,opt){
+  this.raw=root||[]
   return this
 }

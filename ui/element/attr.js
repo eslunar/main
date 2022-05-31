@@ -9,7 +9,16 @@ Element.prototype.attr=function(prop,val){
   return this
 }
 
+Elements.prototype.attr=function(...args){
+  this.raw.forEach(e=>e.attr(...args))
+  return this
+}
+
+
+
+
 
 Element.prototype.hasAttr=function(prop){
   return this.raw.hasAttribute(prop)
 }
+

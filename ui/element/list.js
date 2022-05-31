@@ -18,6 +18,7 @@ Element.prototype.list=function(list){
   return this
 }
 
+
 Element.prototype.push=function(obj,pos){
   let temp=decodeURIComponent(this.attr("template"))
   
@@ -27,6 +28,7 @@ Element.prototype.push=function(obj,pos){
   }
   return this
 }
+
 
 Element.prototype.select=function(handler){
   this.on("click",e=>{
@@ -44,3 +46,4 @@ Element.prototype.select=function(handler){
     }})
   return this
 }
+
