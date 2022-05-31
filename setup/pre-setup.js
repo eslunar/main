@@ -10,7 +10,7 @@ delete sessionStorage.intent
 app.events={}
 
 /*misc info*/
-app.local=location.origin.startsWith("http://localhost")
+app.local=app.scope.startsWith("http://localhost")
 app.framed=!(window.top===window.self)
 app.back=e=>history.back()
 
