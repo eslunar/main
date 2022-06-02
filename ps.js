@@ -1,6 +1,8 @@
 /*declare app*/const app={}
 /*get currentScript to parse manifest*/app.scope=document.currentScript.getAttribute("scope")||location.href
-/*parse manifest*/app.manifest=JSON.parse(document.currentScript.innerHTML.trim()||"{}")
+location.origin=app.scope.origin
+/*parse manifest*/app.manifest=JSON.parse(sessionStorage.manifest||document.currentScript.innerHTML.trim()||"{}")
+delete sessionStorage.manifest
 /*app flags*/app.manifest.flags=(app.manifest.flags||"").split(" ").filter(e=>e)
 /*library root*/app.manifest.root=document.currentScript.getAttribute("root")||new URL(document.currentScript.src).origin+"/"
 /*entry path*/app.manifest.currentEntry=location.href

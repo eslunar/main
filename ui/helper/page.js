@@ -5,18 +5,13 @@ function pageGen(scope){return function Page(url="index",opt={}){
     /*set the new pages' manifest*/
     let mn=opt.manifest||{}
     mn.main=url
-    mn=JSON.stringify(mn)
+    sessionStorage.manifest=JSON.stringify(mn)
     
-  this.frame=new Element(`<iframe>`)
+  this.frame=new Element(`<iframe src="${location.origin}${location.pathname}?${app.uuid(80)}">`)
   .css({width:"100vw",height:"100vh",border:0,...(opt.css||{})})
   
   
   this.open=function(){
-    this.frame.attr("srcdoc",`<html>
-  <base href="${url}" />
-  <script src=${app.manifest.root}/ps.js scope="${url}">${mn}</script>
-  </html>
-  `)
     new Modal(this.frame).open()
     return this
   }
