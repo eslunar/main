@@ -8,7 +8,7 @@ function pageGen(scope){return function Page(url="index",opt={}){
     sessionStorage.manifest=JSON.stringify(mn)
     
   this.frame=new Element(`<iframe src="${location.origin}${location.pathname}?${app.uuid(80)}">`)
-  .css({width:"100vw",height:"100vh",border:0,...(opt.css||{})})
+  .css({width:"100%",height:"100%",border:0,...(opt.css||{})})
   
   
   this.open=function(){
