@@ -1,9 +1,9 @@
 body.attr({
   type:"flex",
-}).css({margin:0,overflowY:"scroll"})
+}).css({margin:0,overflow:"auto"})
 
 css.selector("html,body",{
-  position:"absolute",
+  position:"relative",
   height:"100%",
   width:"100%",
 })
