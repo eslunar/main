@@ -1,10 +1,10 @@
 css.selector(`[fill=""],[fill="both"]`,{
-  width:"100%",
-  height:"100%"
+  minWidth:"100%",
+  minHeight:"100%"
 }).selector(`[fill="width"]`,{
-  width:"100%"
+  minWidth:"100%"
 }).selector(`[fill="height"]`,{
-  height:"100%"
+  minHeight:"100%"
 })
 
 css.selector(`[block=""],[block="both"]`,{

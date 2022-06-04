@@ -1,7 +1,2 @@
-/*const ui = await script("psui")
-  butt = new Element("<button>press me</button>")
-  .on("click",e=>alert("Hello there"))
-  body.add(butt)
-  new Page("index").open()*/
-
-body.add(new Element("<button>help").on("click",e=>new Page("preview",{manifest:{flags:"console"}}).open()))
+const ui=await script("psui")
+body.add(ui.flex("hello").css({width:"100%",height:"180%",backgroundColor:"red"}))

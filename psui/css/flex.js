@@ -84,7 +84,7 @@ css.selector(`flex, [type="flex"]`,{
   borderRadius:"12px",
   boxShadow:"0px 0px 4px 4px var(--shd)"
 })
-return function flex(text = "woohoo", attr = {}) {
+return function flex(text = "", attr = {}) {
   const el = new Element(`<flex>`).attr(attr)
   typeof text == "object" ? el.add(text) : el.html(text)
   return el
