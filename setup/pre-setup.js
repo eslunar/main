@@ -20,10 +20,8 @@ let mn = document.createElement("link")
   mn.href = "data:application/manifest+json," + encodeURIComponent(JSON.stringify({
     name: app.manifest.name || "Playscript App",
     short_name: app.manifest.name || "PlayScript App",
-    start_url: app.manifest.entry || "/",
+    start_url: app.manifest.entry || location.origin,
     display: "standalone",
-    display_override: ["fullscreen", "minimal-ui"],
-    scope: "/",
     description: app.manifest.desc || `The official web app for ${app.manifest.name}.`,
     categories:app.manifest.categories||["playscript apps"],
     orientation:app.manifest.orientation||"portrait",
