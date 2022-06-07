@@ -20,10 +20,15 @@ let mn = document.createElement("link")
   mn.href = "data:application/manifest+json," + encodeURIComponent(JSON.stringify({
     name: app.manifest.name || "Playscript App",
     short_name: app.manifest.name || "PlayScript App",
-    start_url: app.manifest.entry || location.origin,
+    start_url: app.manifest.entry || "/",
     display: "standalone",
-    description: app.manifest.desc || "Some random PlayScript Application",
-    background_color: "#fcfcfc",
+    display_override: ["fullscreen", "minimal-ui"],
+    scope: "/",
+    description: app.manifest.desc || `The official web app for ${app.manifest.name}.`,
+    categories:app.manifest.categories||["playscript apps"],
+    orientation:app.manifest.orientation||"portrait",
+    lang:app.manifest.lang||"en-US",
+    background_color: app.themeMap[app.manifest.theme||"light"].bg,
     theme_color: app.manifest.hue || "#e91e63",
     icons: [
       {
@@ -34,9 +39,17 @@ let mn = document.createElement("link")
       {
         src: app.manifest.icon || location.origin + "/favicon.ico",
         sizes: "512x512",
-        type: "image/png"
+        type: "image/png",
+        purpose:"any maskable"
       }
-      ]
+      ],
+      screenshots:app.manifest.screenshots||[
+        {
+          src: app.manifest.icon || location.origin + "/favicon.ico",
+        sizes: "512x512",
+        type: "image/png",
+        }
+        ]
   }))
   document.head.appendChild(mn)
 

@@ -51,6 +51,14 @@ let mt=document.createElement("meta")
   mt.setAttribute("name","viewport")
   mt.setAttribute("content","width=device-width, initial-scale=1")
   document.head.appendChild(mt)
+    mt=document.createElement("meta")
+  mt.setAttribute("name","theme-color")
+  mt.setAttribute("content",app.manifest.hue||"#e91e63")
+  document.head.appendChild(mt)
+    mt=document.createElement("link")
+  mt.setAttribute("rel","apple-touch-icon")
+  mt.setAttribute("href",app.manifest.favicon||location.origin+"/favicon.ico")
+  document.head.appendChild(mt)
   mt=undefined
 
 
