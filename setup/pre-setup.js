@@ -24,8 +24,6 @@ let mn = document.createElement("link")
     display: "standalone",
     description: app.manifest.desc || `The official web app for ${app.manifest.name}.`,
     categories:app.manifest.categories||["playscript apps"],
-    orientation:app.manifest.orientation||"portrait",
-    lang:app.manifest.lang||"en-US",
     background_color: app.themeMap[app.manifest.theme||"light"].bg,
     theme_color: app.manifest.hue || "#e91e63",
     icons: [
