@@ -14,6 +14,11 @@ app.local=app.scope.startsWith("http://localhost")
 app.framed=!(window.top===window.self)
 app.back=e=>history.back()
 
+/*build manifest extra parts*/
+let ext={}
+app.manifest.shortcuts?ext.shortcuts=app.manifest.shortcuts:""
+app.manifest.screenshots?ext.screenshots=app.manifest.screenshots:""
+
 /*register web manifest*/
 let mn = document.createElement("link")
   mn.rel = "manifest"
@@ -21,9 +26,8 @@ let mn = document.createElement("link")
     name: app.manifest.name || "Playscript App",
     short_name: app.manifest.name || "PlayScript App",
     start_url: app.manifest.entry || location.origin,
-    display: "standalone",
-    description: app.manifest.desc || `The official web app for ${app.manifest.name}.`,
-    categories:app.manifest.categories||["playscript apps"],
+    display: app.manifest.display||"standalone",
+    description: app.manifest.desc || "Powered by PlayScript.",
     background_color: app.themeMap[app.manifest.theme||"light"].bg,
     theme_color: app.manifest.hue || "#e91e63",
     icons: [
@@ -39,13 +43,7 @@ let mn = document.createElement("link")
         purpose:"any maskable"
       }
       ],
-      screenshots:app.manifest.screenshots||[
-        {
-          src: app.manifest.icon || location.origin + "/favicon.ico",
-        sizes: "512x512",
-        type: "image/png",
-        }
-        ]
+      ...ext
   }))
   document.head.appendChild(mn)
 
