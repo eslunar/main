@@ -1,3 +1,9 @@
+/**
+ * @method app
+ * @param {String}
+ * 
+ */
+
 /*declare app*/const app={}
 /*get currentScript to parse manifest*/app.scope=document.currentScript.getAttribute("scope")||location.href
 location.origin=app.scope.origin
@@ -37,8 +43,8 @@ document.documentElement.innerHTML+=`<style>load{width:35px;height:35px;border-r
 
 /*create splash screen*/
 let splashScreen=document.createElement("splash-screen")
-splashScreen.setAttribute("style",`position:fixed;z-index:999999999;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:${app.manifest.flags.includes("transparent")?"transparent":"var(--bg)"}`)
-splashScreen.innerHTML=app.manifest.splash||`<load></load>`
+if(window.top===window.self){splashScreen.setAttribute("style",`position:fixed;z-index:999999999;top:0;left:0;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:${app.manifest.flags.includes("transparent")?"transparent":"var(--bg)"}`)
+splashScreen.innerHTML=app.manifest.splash||`<load></load>`}
 document.documentElement.appendChild(splashScreen)
 splashScreen=undefined;
 

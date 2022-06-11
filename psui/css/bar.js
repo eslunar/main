@@ -51,6 +51,9 @@ css.selector("bar",{
   top:"10px",
 })
 
+.selector("bar text,bar input",{
+  marginRight:"auto"
+})
 
 .selector("svg",{
   height:"24px",

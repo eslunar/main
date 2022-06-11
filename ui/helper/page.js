@@ -9,10 +9,11 @@ function pageGen(scope){return function Page(url="index",opt={}){
     
   this.frame=new Element(`<iframe src="${location.origin}${location.pathname}?${app.uuid(80)}">`)
   .css({width:"100%",height:"100%",border:0,...(opt.css||{})})
+  this.frame.raw.setAttribute("onload","this.nextElementSibling.remove()")
   
   
   this.open=function(){
-    new Modal(this.frame).open()
+    new Modal(`${this.frame.raw.outerHTML}<loader style="background:#00000025;top:0;left:0;width:100vw;height:100vh;z-index:6;position:fixed;display:flex;align-items:center;align-content:center;justify-content:center;"><load></load></loader>`).open()
     return this
   }
   return this
