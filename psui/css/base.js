@@ -12,6 +12,9 @@ css.selector("*::-webkit-scrollbar",{
 
 .selector("[scrollbar=\"hidden\"]::-webkit-scrollbar",{
   display:"none"
+}).selector("[scrollbar=\"gray\"]::-webkit-scrollbar-thumb",{
+  background:"var(--txt)",
+  borderRadius:"8px"
 })
 
 return undefined
